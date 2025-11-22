@@ -18,6 +18,7 @@ __(2)字符串比较__
 ### StringBuilder
 提高字符串的操作效率
 
+```java
     //创建容器
     StringBuilder sb = StringBuilder()
     StringBuilder sb = StringBuilder("abc")
@@ -27,30 +28,35 @@ __(2)字符串比较__
     .reverse()  反转
     .length()  
     .toString()
+```
 
 ### StringJoiner
 
+```java
     StringJoiner sj = StringJoiner("间隔符号")
     StringJoiner sj = StringJoiner("间隔符号","开始符号","结束符号")
     //间隔是两添加的字符之间添加
+```
 
 ## math
-
+```java
     abs()   //绝对值
     cell()/floor     //向上/向下取整
     max(int a ,int b)
     pow(dooub)
     .sqrt()     平方
     .cbrt()     立方
-
+```
 ## System
 
+```java
     .exit(int status)       //终止当前虚拟机 0正常停止 非零异常停止
     .currentTimeMillis()       //返回当前系统时间的毫秒形式
     .arraycopy(数据源数组，起始索引，目的地数组，起始索引，拷贝个数(a中数组中的个数))        //数组拷贝
-
+```
 ## Runtime
 
+```java
     .getRuntime()       //通过方法new一个
 
     .exit()
@@ -59,11 +65,12 @@ __(2)字符串比较__
     .totalMemory()      //jvm已经从系统中获取的总内存
     .freeMemory()       //jvm剩余的内存
     .exec(String command)       //运行cmd命令
-
+```
 
 
 ## Object
 
+```java
     .toString()
     .equals()
     .clone(int a)       //对象克隆
@@ -71,7 +78,7 @@ __(2)字符串比较__
     
     .BigInteger     //获取最大整数
     .BigDecima      //创建精确的小数
-
+```
 ## 正则表达式 
 
 (1)校验字符串是否满足一定的条件
@@ -107,53 +114,6 @@ __(2)字符串比较__
         X{n}    X,正好n次；
         X{n，}  X,n次到无穷；
         X{n,m}  X,n到m次；
-
-### 进阶应用---爬虫
-* 本地爬虫
-
-        Pattern p = new Pattern.compile(规则)   //获取正则表达式
-        Matcher m = p.matcher(str//字符串)      //以p的规则去匹配str文本
-
-        boolean a = m.find() //查找str中符合规则的字符串同时截取索引
-        String b = m.group  //获取截取索引的字符串
-
-        while(m.find){
-            String b = m.group
-        }
-
-* 网络爬虫
-
-        URL url = new URL(网址)
-        URLConnection conn = url.openConnection();
-
-        BUfferedReader br new BufferedReader(new InputStreamReader(conn.getInputStream()));//创建一个对象获取网络中的数据
-
-* 正则分组
-
-    * 捕获分组
-
-            String rule = "(.+).+\\1";  //’.‘表示任意字符 ‘+’表示出现一次
-            System.out.println("你好java你好".matches(rule));
-            System.out.println("<UNK>java<UNK>".matches(rule));
-            System.out.println("123java321".matches(rule));
-            System.out.println("123java3210".matches(rule));
-
-            String rule1 = "((.)\\2*).+\\1"; //((.)\2*)组一，(.)组二,\\（与第？组一样调用）
-            System.out.println("你好java你好".matches(rule1));
-            System.out.println("111java111".matches(rule1));
-
-            String a = "我我我呀呀呀哎呀幺幺哎哟学学学变变变陈琛琛";
-            String rule2 = "(.)\\1+";
-            /*
-            '(.)'重复内容的第一个内容看作一组
-            '\\1+' 第一组重复容
-            */
-            System.out.println(a.replaceAll(rule2, "$1"));
-            //'$1' 替换为第一组内容；
-
-    * 非捕获分组
-    > 括号加上(？:)
-    > 特点： 不占用组号，只把数据括起来;
 
 
 ## 时间类
@@ -250,7 +210,7 @@ __(2)字符串比较__
 多态创建对象 “父类” 父类名 = new “子类”
 
 ## <font color = "orange">静态代码块</font>
-```flow
+```java
 static{
     ....
 }
@@ -264,7 +224,7 @@ static{
 
 任意类型（不确定类型）-> T 表示
 - 变量在第一次使用时，根据赋值对象类型改变
-  ```flow
+  ```java
   private T a;
 
   a = 1 此时 T -> int 类型
@@ -291,7 +251,7 @@ __<span style="color:red">（2）调用方法时可以传递所有的子类对�
 * <font color = "ornange">作用</font>
   * 实现不同类在调用时，可以通过同一个方法名称调用自己的方法: -> 实现多态
 
-```flow
+```java
     //接口
     public interface IPaymentMethod {
         void processPaymentMethod(double amount);
@@ -806,7 +766,7 @@ flowchart TD
   * 造成死锁 
     >1在线程A中上锁,并请求线程B
     >2在线程B中上锁，并且请求A
-    ```flow
+    ```java
         public class MyThreat2{
             static int Count = 10;
             static int food = 0;
@@ -969,7 +929,7 @@ newFixedThreatPool(int nThreat)
   * 接口不能是Final类；（相当于没有代理）
   * 不能在代理方法中继续代理；</font>
 
-```flow
+```java
         public static Methon createProxy(Student stu){
 
                 //参数1：用于指定用哪个加载器，去加载生成代理
@@ -1004,7 +964,7 @@ newFixedThreatPool(int nThreat)
 # 图形化界面
 
 * 界面设置样例
-```flow
+```java
     public class GameFrame extends JFrame {
 
         public GameFrame(int width, int height, String title) {
@@ -1111,7 +1071,7 @@ newFixedThreatPool(int nThreat)
 
 * 扩展的功能由新的类承担，在旧类中只需要实现接口就行；
 
-```flow
+```java
     //不遵循原则
     public class PaymentProcessor{
         public void processPayment(String type, double amount){ //判断支付方式
@@ -1229,7 +1189,7 @@ flowchart TD
 
 <font color = "lightyellow">核心API</font>
 * Connection
-  ```flow
+  ```java
   //数据库连接的重要接口
 
   1.连接：url：jdbc：（连接的是什么数据库）：//数据库ip：端口//数据库名称
@@ -1238,7 +1198,7 @@ flowchart TD
   ```
 
 * Statement(有条件容易产生SQL注入攻击，一般不用) ->(后期学习现代数据库操作写法)
-  ```flow
+  ```java
   操作数据库并且返回一个结果对象
   ```
 
@@ -1249,16 +1209,16 @@ flowchart TD
   ```
 
 * ResultSet
-  ```flow
+  ```java
   保存查询结果
   ```
 
 * 实体类
-  ```flow
+  ```java
     一个表对应一个类，一行数据对饮一个对象，一个属性对应一个数据
     ```
 * 主键回显
-  ```flow
+  ```java
   新插入的数据，马上就要修改
   （账号注册后，设置账号昵称）
 
@@ -1268,7 +1228,7 @@ flowchart TD
   ```
 
 * 批量操作
-  ```flow
+  ```java
   1.获取连接新增批量操作设置
   "jdbc:mysql:///zenless_zone_zero（？rewriteBatchedStatements=ture"
 
@@ -1280,13 +1240,13 @@ flowchart TD
   ```
 
 * 连接池
-  ```flow
+  ```java
   解决资源频繁创建和销毁的问题
   Druid(常用，使用广泛)
   Hikari(速度快，简单，可靠)
   ```
   - druid
-  ```flow
+  ```java
   软编码
   1.创建资源配置文件 
   @Test
@@ -1320,7 +1280,7 @@ flowchart TD
     }
   ```
   - HikariCP
-  ```flow
+  ```java
   @Test
     public void testResourceHikari()throws Exception {
         Properties props = new Properties();
@@ -1405,7 +1365,7 @@ flowchart TD
 - @Retention：表示什么级别保存该注解信息，描绘生命周期
 - @Document：说明该注解被包含在javadoc中
 - @Inherited：子类可以继承父类中的该注解
-  ```flow
+  ```java
   public class Test {
     @MyAnnotation
     public void hh(){}
@@ -1450,7 +1410,7 @@ flowchart TD
   * Method 成员方法
 
 方法
-```flow
+```java
 1.classforName(String name)     返回指定类名对象
 2.newInstance()     调用缺省函数构造，返回class
 3.getName   返回Class对象的所有实体
