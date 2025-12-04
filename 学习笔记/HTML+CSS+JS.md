@@ -15,6 +15,7 @@
 
 
 # HTML
+<delails>
 <font coler = 'yellow'>标签</font>
 
 - <>
@@ -257,6 +258,7 @@ iframe 属性
 * 移动设备 name = "viewport" content = ""
 * 配置网页关键字 name = "description"
 * 针对搜索引擎爬虫 name = “robots” content =""
+</details>
 
 # h5
 
