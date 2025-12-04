@@ -15,8 +15,9 @@
 
 
 # HTML
-<delails>
-<font coler = 'yellow'>标签</font>
+
+<details>
+<summary><span style="color: yellow;"><strong>标签</strong></span></summary>
 
 - <>
 - '括号中的语句'
@@ -30,26 +31,26 @@
 
 ## 网页基本设置
 
-* <font color = 'lightyellow'>标签关系</font>
+* <span style="color: lightyellow;">**标签关系**</span>
   - 父子关系
   - 兄弟关系
 
-* <font color = 'lightyellow'>标签属性</font>
+* <span style="color: lightyellow;">**标签属性**</span>
   - 标签属性 （名 + 值）
   - 在标签框中《marquee + 属性》
   - 分类：通用标签/特有;
 
 * 文档声明
-  ```flow
+  ```html
   <!DOCTYPE html> 版本声明
   ```
 * 编码
-  ```flow
+  ```html
   <meta charset="">
   ```
 
 * 语言设置
-  ```flow
+  ```html
   属性添加
   <html lang = "（语言）">
   ```
@@ -57,17 +58,17 @@
 
 ## 标签
 
-* <foont color = 'orange'>语义化标签</font>
+* <span style="color: orange;">**语义化标签**</span>
   - 可读性高
   - 机械会通过标签来反馈内容
 
 * 性质
-  ```flow
+  ```
   1.块级元素 （独占一行）
   2.行内元素 （只占一行中的一小块，是行的一部分）
   ```
 * 排版标签
-    ```flow
+    ```
     1.等级标签
     - h1 ~ h6 (等级递减)
 
@@ -88,8 +89,8 @@
   - span 没有语义，包裹短语的包装袋
 
 * 图片标签
-  ```flow
-  img src = with + hight + "图片的URL地址  + alt = “”"
+  ```html
+  <img src="图片的URL地址" width="宽度" height="高度" alt="描述">
   1.搜索引擎可以通过alt确定图片内容
 
   2.相对路径
@@ -109,81 +110,81 @@
   ```
 
 * 超链接
-  ```fow
+  ```html
   1.网页
-  <a href = 地址 + target = 查看网页方式（_self/blank）>文本</a>
+  <a href="地址" target="查看网页方式（_self/_blank）">文本</a>
   2.本地文件
   修改href地址为本地
   ```
   - 超链接跳转锚点（类似于标记）
-  ```flow
+  ```html
   实现页面位置跳转
-  <a href = "#名称"></a>
-  <a name = "html"></a>
+  <a href="#名称"></a>
+  <a name="html"></a>
 
   ！特殊
-  <a href = "#"></a> 回到顶部
-  <a href = ""></a> 刷新页面
-  <a href = "javascript:js脚本;"></a> 刷新页面
-  <a herf = "特定关键词：（）"></a> 跳转指定应用
+  <a href="#"></a> 回到顶部
+  <a href=""></a> 刷新页面
+  <a href="javascript:js脚本;"></a> 刷新页面
+  <a href="特定关键词：（）"></a> 跳转指定应用
   ```
 ## 列表
 
-* 有序列表```<ol>```
-* 无序列表```<ul>```
+* 有序列表 `<ol>`
+* 无序列表 `<ul>`
 * 自定义列表
-  ```
+  ```html
   <dl>
-    <dt>头
-      <dd>解释头
+    <dt>头</dt>
+    <dd>解释头</dd>
+  </dl>
   ```
-* 列表单元```只要包含在列表中用<li>包裹（除了自定义）```
+* 列表单元：只要包含在列表中用 `<li>` 包裹（除了自定义）
 
 ## 表格
 
 * 格式
-  ```flow
+  ```html
   <table>
-    <cpation>标题
-    <thead>表格头部（列）th 列
-    <tbody>主体   <tr> 行 <td>元素
-    <tfoot>脚注
+    <caption>标题</caption>
+    <thead>表格头部（列）th 列</thead>
+    <tbody>主体   <tr> 行 <td>元素</td></tr></tbody>
+    <tfoot>脚注</tfoot>
   </table>
   ```
 
 * 属性
-  ```flow
+  ```
   # table
-  1.broder =
-  2.width =
-  3.height = 
-  4.cellspacing = (间隔)
+  1.border = "边框宽度"
+  2.width = "宽度"
+  3.height = "高度"
+  4.cellspacing = "间隔"
 
   # thead
-  1.align = "right/left/center" OR valign = "botton/midle/top"
-
+  1.align = "right/left/center" OR valign = "bottom/middle/top"
 
   #跨行和跨列
-  colspan = "" 跨列 + 列数
-  rowspan = "" 跨行 + 行数
+  colspan = "列数" 跨列
+  rowspan = "行数" 跨行
   ```
 
 ## 表单
 
 实现用户和网站的交互界面
 
-```flow
-<form action = "交互行为" target = "怎么打开">
-  <input type = "test" name = "网站支持的类型"> 输入框 类型是文本
+```html
+<form action="交互行为" target="怎么打开">
+  <input type="text" name="网站支持的类型"> 输入框 类型是文本
   <button>搜索</button>
-</from>
+</form>
 ```
 
 * form 包裹所有块
 
 * 常用控件
   - input
-    ```flow
+    ```html
     1.type
       - text 文本
       - password 密码
@@ -195,49 +196,47 @@
     7.submit 提交（不写name，类似于一个button）
     8.reset 重置
     9.button 普通按钮
-    10.diable 禁止使用
+    10.disabled 禁止使用
     11.id 组件连接
     ```
 
   - button
-    ```flow
+    ```html
     1.submit
     2.reset 重置
     3.button 普通按钮
     ```
   - textarea
-    ```flow
-    1.col 列
-    2.row 行
+    ```html
+    1.cols 列
+    2.rows 行
     ```
   - select （下拉框）
-    ```flow
+    ```html
     <select>
-      <option value = ""> 选项内容</option>
-      .
-      .
-      .
+      <option value="">选项内容</option>
+      ...
     </select>
 
     有value会取value
     ```
-  - lable 标签
-    ```flow
+  - label 标签
+    ```html
     1. for = "id" 连接组件
     ```
 
   - fieldset和legend (分组)
-    ```flow
-    <fiedset>
-      <legrnd>
-    </fiedset>
+    ```html
+    <fieldset>
+      <legend>分组标题</legend>
+    </fieldset>
     ```
 
 ## 框架结构
 
 用途：嵌入网页
 iframe 属性
-* scr
+* src
 
 ## 字符实体
 
@@ -257,7 +256,7 @@ iframe 属性
 * 兼容 + 版本 http-equiv = "" content = ""
 * 移动设备 name = "viewport" content = ""
 * 配置网页关键字 name = "description"
-* 针对搜索引擎爬虫 name = “robots” content =""
+* 针对搜索引擎爬虫 name = "robots" content = ""
 </details>
 
 # h5
@@ -410,7 +409,7 @@ iframe 属性
 
 # CSS 样式
 
-<font color = "Orange">Mmdn web docs CSS标签网站</font>
+<span style="color: orange;">**参考文档**：MDN Web Docs CSS 标签网站</span>
 
 特性
 * 层叠性 （后的覆盖前的【权重相同】）
@@ -418,17 +417,17 @@ iframe 属性
 
 ## 选择器
 内部样式格式
-```flow
+```html
 <style>
   选择器{
-    申明块（属性）
+    声明块（属性）
   }
 </style>
 ```
 
 外部样式格式
 * 需要一个专门的文件
-  ```flow
+  ```html
   1.引入样式
   <link rel="stylesheet" href="文件地址">
   ```
@@ -446,7 +445,7 @@ iframe 属性
   * 6.并集选择器 2~4无逗号连接 or的关系   ！！！
   * 7.后代选择器 （选中包裹的所有内容 空格）
   * 8.子代选择器 （专指下一代，跨代不行）
-      ```flow
+      ```html
       (元素)>[] !!![]中是所有子元素中查询的总体条件
       
       div>p:first-child
@@ -458,7 +457,7 @@ iframe 属性
         <ul>
           <li>
             <p>被选中</p>
-            <P>w</p>
+            <p>w</p>
           </li>
         </ul>
         <p>不被选中 不是div的第一个孩子</p>
@@ -471,13 +470,13 @@ iframe 属性
       ```
   * 9.兄弟选择器 +连接一个兄弟 （向下相邻的[一行]元素相同的，没有不变）~连接所有的
   * 10.属性选择器  [] 选中具有[]中的属性的元素
-    ```flow 
-      [（）^ = ""] 以~开头
-      [（）$ = ""] 以~结尾
-      [（）* = ""] 包含~
+    ```css
+      [属性^="值"] 以~开头
+      [属性$="值"] 以~结尾
+      [属性*="值"] 包含~
     ```
   * 12.伪类选择器（状态描述）
-    ```flow
+    ```css
     1.动态伪类
       （元素）:link 没有访问过的
       :visited 访问过的
@@ -517,19 +516,19 @@ iframe 属性
     :lang="语言"  选中语言是“”的
 
     6.伪元素选择器（元素中的特殊位置）
-    ::first-leter 选中第一个字符
+    ::first-letter 选中第一个字符
     ::first-line  选中第一行
     ::selection   选中被鼠标选中的文字
     ::placeholder 选中input中的提示文字
     ::before      选中第一个元素最开始的位置随后创建一个子元素
-    ::after
+    ::after       选中第一个元素最后的位置随后创建一个子元素
     ```
 
-优先级（根据a，b,c的数量比较，大的在前）
+优先级（根据a，b，c的数量比较，大的在前）
 * a：id选择器
 * b：类，伪类，属性
 * c：元素，伪元素
-* ！important; 属性后 - 表示一定显示
+* `!important;` 属性后 - 表示一定显示
 
 ## 单位
 
@@ -537,9 +536,9 @@ px 像素
 （x）em 当前（或前辈的）元素的font-size的x倍
 （x）rem 根元素元素的font-size的x倍
 （x）% 父元素的font-size的x%
-  ```
-  特殊情况
-  ```
+
+特殊情况：
+- 百分比在某些属性中参考的是父元素的对应属性值
 ## 文本属性
 ### 颜色
 
@@ -572,11 +571,11 @@ px 像素
 
 单词间距```word-spacing```
 
-线```text-decoration: overline/underline/linethrough/none```
+线```text-decoration: overline/underline/line-through/none```
 
-文本缩进```test-indent```
+文本缩进```text-indent```
 
-水平文本对齐```test-align:```
+水平文本对齐```text-align:```
 
 对齐```vertical-align```
 * baseline：与父元素的基线对齐
@@ -585,13 +584,13 @@ px 像素
 * bottom：底部对齐
 
 垂直文本对齐
-```flow
+```
 1.顶部默认
 2.居中 height = line-height
 3.底部 line-height = （height x 2） - font-size - x（动态值）； 
 ```
 
-行高：```line-hight: normal/px/数字（基于font-size倍数）/百分比``` (字体是基于x放入方框进行调整的)
+行高：```line-height: normal/px/数字（基于font-size倍数）/百分比``` (字体是基于x放入方框进行调整的)
 
 ### 列表样式
 
@@ -602,15 +601,15 @@ px 像素
   ....
   ```
 2.列表位置```list-style-position```
-3.自定义列表符号```list-style-image:url("")
-4.符合属性1~3```list-style:```
+3.自定义列表符号```list-style-image: url("")```
+4.复合属性1~3```list-style:```
 
 
 ### 表格样式
 
-1.边框border：包含所有属性<font color>必须指定完整</font>
+1.边框border：包含所有属性，<span style="color: orange;">**必须指定完整**</span>
 
-2.列宽```table-layout:auto/foxed```
+2.列宽```table-layout: auto/fixed```
 
 3.单元格间距```border-spacing```
 
@@ -622,7 +621,7 @@ px 像素
 
 background: 颜色 图片 位置
 
-### 鼠标表样式
+### 鼠标样式
 
 cursor: pointer/move/wait/help; 
 
@@ -630,7 +629,7 @@ cursor: pointer/move/wait/help;
 ## 显示模式
 
 * 块元素
-  ```flow
+  ```
   1.主题标签：<html><body>
   2.排版标签：<h1>~<h6> <hr> <p> <pre> <div>
   3.列表标签
@@ -638,21 +637,21 @@ cursor: pointer/move/wait/help;
   5.<form> <option>
   ```
 * 行内元素
-  ```flow
+  ```
   1.文本标签：<br> <em> <strong> <sup> <sub> <del> <ins>
   2.<a> <label>
   ```
 * 行内块元素
-  ```flow
+  ```
   1.图片：<img>
   2.单元格：<td> <th>
-  3.表格控件：<input> <textarea> <select> <botton>
+  3.表格控件：<input> <textarea> <select> <button>
   4.框架标签：<iframe>
   ```
 
 修改显示模式
 display：none/block/inline/inline-block
-visaibility：show;
+visibility：visible/hidden;
 
 ## 内容溢出问题 - overflow
   * hidden 隐藏
@@ -664,17 +663,16 @@ visaibility：show;
 
 * 从外往里包裹成一个盒子margin是最外面的一层
   * margin（外边距）
-    ```flow
+    ```
     1.子元素的margin在父元素内计算
     2.行内元素无法设置上下margin
-
     ```
   * border（边框）
   * padding (内边距)
   * content（内容文本）
     ```
-    max-with
-    min-with
+    max-width
+    min-width
     无论如何不会因为浏览器窗口的变化而大/小于一个限度
     ```
 
@@ -703,7 +701,7 @@ visaibility：show;
 
 特点
 ```
-浮动之后不在底层统一的层级中，而是自己一层，相当于在底层上方漂浮;
+浮动之后不在底层统一的层级中，而是自己一层，相当于在底层上方漂浮
 ```
 * 脱离文档流
 * 不管前面什么元素，浮动后：默认宽高是杯内容撑开，可设置宽高
@@ -718,8 +716,8 @@ float功能
 浮动影响解决
 * 浮动元素不影响父元素长宽  
 * 浮动元素与其他不浮动元素冲突元素
-  ```flow
-  clear: left/right/both 清除浮动兄弟的影响
+  ```css
+  clear: left/right/both; 清除浮动兄弟的影响
   ```
 
 # 定位
@@ -730,7 +728,7 @@ float功能
  * 都有定位谁先写谁优先显示
 
 绝对定位 
- * 开启绝对定:```position:absolute```
+ * 开启绝对定位：```position: absolute;```
  * 参考它的包含块
     * 没有脱离文档流 ---父元素
     * 脱离文档流 --- 第一个开启定位的元素
@@ -744,11 +742,10 @@ float功能
  * 不脱离文档流
  * 可以和滚动一起用
 
-
-<font color = "orange">定位层级</font>
+<span style="color: orange;">**定位层级**</span>
   * z-index 调整元素层级
 
-<font color = "orange">特殊应用</font>
+<span style="color: orange;">**特殊应用**</span>
   * 充满父元素 --- 没有长宽（无论超出不足）
   * 居中
 
@@ -767,28 +764,28 @@ float功能
   * 页脚
 
 * 重置默认样式
- * ```reset.css - 自定义的一个默认样式初始化文件``` 选择到具有默认样式的元素，清空默认的样式
- * ```Normalize.css - 标准化默认样式``` 保留有价值的默认样式
-   * http://necolas.gihub.io/normalize.css/
+ * `reset.css` - 自定义的一个默认样式初始化文件，选择到具有默认样式的元素，清空默认的样式
+ * `Normalize.css` - 标准化默认样式，保留有价值的默认样式
+   * https://necolas.github.io/normalize.css/
 
 
 # css5
 
-- <span style="color: #d48806">CSS3</span>是<span style="color: #d48806">CSS2</span>的升级版本，它在CSS2的基础上，<span style="color: #d48806">新增了很多强大的新功能</span>，从而解决一些实际面临的问题。
-- CSS3在未来会按照<span style="color: #d48806">模块化的方式</span>去发展：<span style="color: #d48806">https://www.w3.org/Style/CSS/current-work.html</span>
+- <span style="color: #d48806;">**CSS3**</span>是<span style="color: #d48806;">**CSS2**</span>的升级版本，它在CSS2的基础上，<span style="color: #d48806;">**新增了很多强大的新功能**</span>，从而解决一些实际面临的问题。
+- CSS3在未来会按照<span style="color: #d48806;">**模块化的方式**</span>去发展：https://www.w3.org/Style/CSS/current-work.html
 - CSS3的新特性如下：
-  - 新增了更加实用的<span style="color: #d48806">选择器</span>，例如：<span style="color: #d48806">动态伪类选择器、目标伪类选择器、伪元素选择器</span>等等。
-  - 新增了更好的<span style="color: #d48806">视觉效果</span>，例如：<span style="color: #d48806">圆角、阴影、渐变</span>等。
-  - 新增了丰富的<span style="color: #d48806">背景效果</span>，例如：<span style="color: #d48806">支持多个背景图片</span>，同时新增了若干个背景相关的属性。
-  - 新增了全新的<span style="color: #d48806">布局方案</span>——<span style="color: #d48806">弹性盒子</span>。
-  - 新增了<span style="color: #d48806">Web字体</span>，可以显示用户电脑上没有安装的字体。
-  - 增强了<span style="color: #d48806">颜色</span>，例如：<span style="color: #d48806">HSL、HSLA、RGBA</span>几种新的颜色模式，新增<span style="color: #d48806">opacity</span>属性来控制透明度。
-  - 增加了<span style="color: #d48806">2D和3D变换</span>，例如：<span style="color: #d48806">旋转、扭曲、缩放、位移</span>等。
-  - 增加<span style="color: #d48806">动画与过渡效果</span>，让效果的变换更具流线性、平滑性。
+  - 新增了更加实用的<span style="color: #d48806;">**选择器**</span>，例如：<span style="color: #d48806;">**动态伪类选择器、目标伪类选择器、伪元素选择器**</span>等等。
+  - 新增了更好的<span style="color: #d48806;">**视觉效果**</span>，例如：<span style="color: #d48806;">**圆角、阴影、渐变**</span>等。
+  - 新增了丰富的<span style="color: #d48806;">**背景效果**</span>，例如：<span style="color: #d48806;">**支持多个背景图片**</span>，同时新增了若干个背景相关的属性。
+  - 新增了全新的<span style="color: #d48806;">**布局方案**</span>——<span style="color: #d48806;">**弹性盒子**</span>。
+  - 新增了<span style="color: #d48806;">**Web字体**</span>，可以显示用户电脑上没有安装的字体。
+  - 增强了<span style="color: #d48806;">**颜色**</span>，例如：<span style="color: #d48806;">**HSL、HSLA、RGBA**</span>几种新的颜色模式，新增<span style="color: #d48806;">**opacity**</span>属性来控制透明度。
+  - 增加了<span style="color: #d48806;">**2D和3D变换**</span>，例如：<span style="color: #d48806;">**旋转、扭曲、缩放、位移**</span>等。
+  - 增加<span style="color: #d48806;">**动画与过渡效果**</span>，让效果的变换更具流线性、平滑性。
 
 
 * 什么是私有前缀
-  如下代码中的 <span style="color: #d48806">-webkit-</span> 就是私有前缀
+  如下代码中的 <span style="color: #d48806;">`-webkit-`</span> 就是私有前缀
 
   ```css
   div {
@@ -799,13 +796,10 @@ float功能
   ```
 
 **常见**：
-<span style="color: #d48806">Chrome浏览器</span>：<span style="color: #d48806">-webkit-</span>
-
-<span style="color: #d48806">Safari浏览器</span>：<span style="color: #d48806">-webkit-</span>
-
-<span style="color: #d48806">Firefox浏览器</span>：<span style="color: #d48806">-moz-</span>
-
-<span style="color: #d48806">Edge浏览器</span>：<span style="color: #d48806">-webkit-</span>
+- <span style="color: #d48806;">**Chrome浏览器**</span>：<span style="color: #d48806;">`-webkit-`</span>
+- <span style="color: #d48806;">**Safari浏览器**</span>：<span style="color: #d48806;">`-webkit-`</span>
+- <span style="color: #d48806;">**Firefox浏览器**</span>：<span style="color: #d48806;">`-moz-`</span>
+- <span style="color: #d48806;">**Edge浏览器**</span>：<span style="color: #d48806;">`-webkit-`</span>
 
 ## 长度单位
 
@@ -967,7 +961,7 @@ border-radius: 10px;
 
 ## 7.轮廓
 
-轮廓属性```例子：outline: 50px solid blue;```
+轮廓属性：```outline: 50px solid blue;```
 
 - `outline-width`：外轮廓的宽度
 - `outline-color`：外轮廓的颜色
@@ -1127,8 +1121,9 @@ background-image: repeating-radial-gradient(shape size at position, color-stop1,
 ```
 
 ## 字体图标
+
 字体生成：
-```阿里字体定制工具（https://www.iconfont.cn/webfont）```
+- 阿里字体定制工具：https://www.iconfont.cn/webfont
 
 字体图标介绍
 * 核心优势
@@ -1136,7 +1131,7 @@ background-image: repeating-radial-gradient(shape size at position, color-stop1,
   - 灵活性强：可像文字一样自由修改大小、颜色、样式（如加粗、倾斜），适配不同设计场景。
   - 兼容性好：对老旧浏览器（如 IE 系列）也能良好支持，保障多端显示一致性。
 * 使用建议
-  - 不同平台字体图标使用方式存在差异，建议参考对应平台使用指南。实际开发中，阿里图标库```（https://www.iconfont.cn/）```是使用广泛的资源平台，可通过该平台筛选、下载、管理字体图标，满足网页、移动端等多场景需求。
+  - 不同平台字体图标使用方式存在差异，建议参考对应平台使用指南。实际开发中，阿里图标库（https://www.iconfont.cn/）是使用广泛的资源平台，可通过该平台筛选、下载、管理字体图标，满足网页、移动端等多场景需求。
 
 ## 2D变换
 ### 2D 位移 (Transform: Translate)
@@ -1173,7 +1168,6 @@ transform: translate(30px, 40px);
 ```
 
 
-markdown
 ### 2D 缩放 (Transform: Scale)
 
 * **基本概念**:
@@ -1517,14 +1511,16 @@ transform: scaleX(1.2) scaleZ(1.5);
   - **`column-span`**
     - 指定是否跨列；值：`none`、`all`。
     - 
-```css
+```html
 <div class="article">
     <h2 class="article-title">文章标题</h2>
     <div class="article-content">
         这里是文章内容，会自动分成多列显示...
     </div>
 </div>
-css
+```
+
+```css
 .article {
     columns: 3 300px;      /* 3列，每列最小300px */
     column-gap: 30px;      /* 列间距30px */
@@ -1553,16 +1549,16 @@ css
 
   伸缩盒模型的出现，逐渐演变出了一套新的布局方案——flex布局。
 
-  # 2. 伸缩容器、伸缩项目
+## 2. 伸缩容器、伸缩项目
 
-## 伸缩容器
+### 伸缩容器
 - **伸缩容器**：开启了 flex 的元素，就是伸缩容器。
 
 1. 给元素设置：`display: flex` 或 `display: inline-flex`，该元素就变为了伸缩容器。
 2. `display: inline-flex` 很少使用，因为可以给多个伸缩容器的父容器，也设置为伸缩容器。
 3. 一个元素可以同时是：伸缩容器、伸缩项目。
 
-## 伸缩项目
+### 伸缩项目
 - **伸缩项目**：伸缩容器所有子元素自动成为了伸缩项目。
 
 1. 仅伸缩容器的子元素成为了伸缩项目，孙子元素、重孙子元素等后代，不是伸缩项目。
@@ -1573,8 +1569,7 @@ css
 *   **主轴**：伸缩项目沿着主轴排列，主轴默认是水平的，默认方向是：从左到右（左边是起点，右边是终点）。
 *   **侧轴**：与主轴垂直的就是侧轴，侧轴默认是垂直的，默认方向是：从上到下（上边是起点，下边是终点）。
 
----
-主轴方向：
+#### 主轴方向
     *   **属性名**：`flex-direction`
     *   **常用值如下**：
 
@@ -1583,7 +1578,6 @@ css
         3.  `column`：主轴方向垂直从上到下。
         4.  `column-reverse`：主轴方向垂直从下到上。
 
----
 flex-direction 属性图示：
   *  `column-reverse`：⬆️ (从下往上)
   *  `column`：⬇️ (从上往下)
@@ -1592,8 +1586,7 @@ flex-direction 属性图示：
 
 > **注意**：改变了主轴的方向，侧轴方向也随之改变。
 
----
-**主轴换行方式**：
+#### 主轴换行方式
 
 *   **属性名**：`flex-wrap`
 *   **常用值如下**：
@@ -1755,10 +1748,13 @@ order 属性
 
 ## 用法一：在 link 标签中使用
 
+**用法一：在 link 标签中使用**
 ```html
 <link rel="stylesheet" media="具体的媒体查询" href="mystylesheet.css">
-用法二：在 CSS 中使用 @media
-css
+```
+
+**用法二：在 CSS 中使用 @media**
+```css
 @media screen and (max-width: 768px) {
     /* CSS Code */
 }
@@ -1768,12 +1764,12 @@ css
 }
 ```
 
-# javaScript
-```https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Control_flow_and_error_handling```
+# JavaScript
 
-菜鸟：```https://www.runoob.com/js/js-howto.html```
+- MDN文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Control_flow_and_error_handling
+- 菜鸟教程：https://www.runoob.com/js/js-howto.html
 
-***node中的python冲突问题***
+## Node中的Python冲突问题
 - node自动安装的python和本地已有的python冲突
   ```
   1.创建环境（在您的项目文件夹中）：
@@ -1785,7 +1781,7 @@ css
   deactivate
   ```
 
-***规范***
+## 规范
 - 统一在body或head底端不影响页面的可读性
 - body和head的区别
   - body中：在页面所有组件加载完成后下载脚本***（推荐）***
@@ -1808,9 +1804,9 @@ css
 * String
 * Boolean
 * Null  （值是null，明确变量之后会赋值，暂时为null）
-* Undifines (没有值（不是null），设计失误没赋值)
+* Undefined (没有值（不是null），设计失误没赋值)
 * symbol
-* object (类似于map)```{key:value}```
+* object (类似于map) `{key:value}`
   - 方法
   ```javaScript
   //访问对象的方法
@@ -1825,11 +1821,11 @@ css
   //访问对象方法
   objectName.methodName()
   ```
-* Function(函数)```function name(){return}```
+* Function(函数) `function name(){return}`
 
 ***变量声明***
 * var 初始化一个值(function内局部生效)
-* let 申明一个会计作用域变量（只在<font color = "orange">{}</font>中生效）
+* let 声明一个块级作用域变量（只在 `{}` 中生效）
 * const 常量
 * 无类型 声明一个窗口（window全局变量 -> 可以window.name访问）
 ```javaScript
@@ -1859,22 +1855,26 @@ function letTest() {
   - 算数运算
   - 连接字符串
 * .（点运算）
-  - String方法```https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String```
+  - String方法：https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
   
 
 
 ## API
 
 ### 输出
-***console.log***
+**console.log**
 - 日志输出->多用于测试
-***window.alter***
+
+**window.alert**
 - 弹出警告窗
-***document.write***
+
+**document.write**
 - 方法内容写到文档中
-- 查找对应的html标签```getElementById("html-id属性")``` 
-***innerHTML<font color = "yellow">是属性不是方法</font>***
+- 查找对应的html标签：`getElementById("html-id属性")` 
+
+<span style="color: yellow;">**innerHTML**</span>（**是属性不是方法**）
 - 写入html文件中
+
 ---
 ### 事件
 
@@ -1916,7 +1916,7 @@ function letTest() {
   }
   ```
 
-```String对象方法：https://www.runoob.com/jsref/jsref-obj-string.html```
+- String对象方法：https://www.runoob.com/jsref/jsref-obj-string.html
 
 * 字符串模板 -> 允许调用类对象
   ```javascript
@@ -1933,7 +1933,7 @@ function letTest() {
   // 输出: 大家好，我是 小红，我的职业是 设计师。
   ```
 
-* 字符转换```https://www.runoob.com/js/js-type-conversion.html```
+* 字符转换：https://www.runoob.com/js/js-type-conversion.html
 
 ### 正则表达式
 
@@ -1944,7 +1944,7 @@ function letTest() {
   |g|	执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）。
   |m|	执行多行匹配。
 
-* 方法/规则```https://www.runoob.com/jsref/jsref-obj-regexp.html```
+* 方法/规则：https://www.runoob.com/jsref/jsref-obj-regexp.html
 
 ```javascript
 var str = "Visit Runoob!"; 
