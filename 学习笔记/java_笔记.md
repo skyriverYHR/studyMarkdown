@@ -221,7 +221,7 @@ static{
 - 线程池，数据库连接池管理 ->只在首次需要时创建一个集中管理的类
     
 ## <font color = "orange">泛型</font>
-<font color = "lightyellow">Java 泛型主要用于解决 类型系统（Type System） 的问题：如何在不丢失类型安全的前提下，编写可处理多种数据类型的通用代码</font>
+<font color = "lightblue">Java 泛型主要用于解决 类型系统（Type System） 的问题：如何在不丢失类型安全的前提下，编写可处理多种数据类型的通用代码</font>
 
 
 任意类型（不确定类型）-> T 表示
