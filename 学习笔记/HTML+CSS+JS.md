@@ -1,28 +1,13 @@
-# 实用技巧
-
-元素水平垂直居中：
-  * 1.伸缩盒子自动边框调整
-      ```css
-      style {
-        .outer {
-          display:flex
-        }
-        .inner {
-          margin:auto
-        }
-      }
-      ```
-
 
 # HTML
 
-<details>
-<summary><span style="color: yellow;"><strong>标签</strong></span></summary>
+## 标签
 
 - <>
 - '括号中的语句'
 
-基本架构语句
+基本架构语句：
+
 - html 包含整个页面
 - head 包含网页的元数据，如标题、字符集、样式表等
 - title 定义网页的标题，显示在浏览器标签上(一般包含在head中)
@@ -31,14 +16,18 @@
 
 ## 网页基本设置
 
-* <span style="color: lightyellow;">**标签关系**</span>
+* **标签关系**
+
   - 父子关系
   - 兄弟关系
 
-* <span style="color: lightyellow;">**标签属性**</span>
+* **标签属性**
   - 标签属性 （名 + 值）
   - 在标签框中《marquee + 属性》
   - 分类：通用标签/特有;
+
+> [!IMPORTANT]
+> 理解标签的层级关系与属性配置是构建 HTML 结构的前提，任何布局与交互都以此为基础。
 
 * 文档声明
   ```html
@@ -58,7 +47,7 @@
 
 ## 标签
 
-* <span style="color: orange;">**语义化标签**</span>
+* **语义化标签**
   - 可读性高
   - 机械会通过标签来反馈内容
 
@@ -259,7 +248,7 @@ iframe 属性
 * 针对搜索引擎爬虫 name = "robots" content = ""
 </details>
 
-# h5
+## h5
 
 ## 新增布局标签
 
@@ -326,7 +315,6 @@ iframe 属性
 </details>
 
 ```
-
 
 ## 4. 新增文本标签
 
@@ -407,9 +395,9 @@ iframe 属性
 | **`preload`** | `auto` / `metadata` / `none` | 音频预加载，如果使用 autoplay，则忽略该属性。<br>• `none`：不预加载音频。<br>• `metadata`：仅预先获取音频的元数据（例如长度）。<br>• `auto`：可以下载整个音频文件，即使用户不希望使用它。 |
 
 
-# CSS 样式
+## CSS 样式
 
-<span style="color: orange;">**参考文档**：MDN Web Docs CSS 标签网站</span>
+**参考文档**：MDN Web Docs CSS 标签网站
 
 特性
 * 层叠性 （后的覆盖前的【权重相同】）
@@ -607,7 +595,7 @@ px 像素
 
 ### 表格样式
 
-1.边框border：包含所有属性，<span style="color: orange;">**必须指定完整**</span>
+1.边框border：包含所有属性，**必须指定完整**
 
 2.列宽```table-layout: auto/fixed```
 
@@ -659,7 +647,7 @@ visibility：visible/hidden;
   * scroll 滚动条
 
 
-# 盒子模型
+## 盒子模型
 
 * 从外往里包裹成一个盒子margin是最外面的一层
   * margin（外边距）
@@ -678,7 +666,7 @@ visibility：visible/hidden;
 
   * 特点：都可以拆成上下左右
 
-# 问题：
+## 问题：
 1.塌陷问题
   给第一个子元素设置上margin最后一个子元素设置下margin会导致设置margin给父元素
 
@@ -697,7 +685,7 @@ visibility：visible/hidden;
   * 修改为块
   * 把字调没
 
-# 浮动
+## 浮动
 
 特点
 ```
@@ -720,7 +708,7 @@ float功能
   clear: left/right/both; 清除浮动兄弟的影响
   ```
 
-# 定位
+## 定位
 
 相对定位（相对于发生移动前原来的位置）
  * 开启相对定位：```position: relative;```
@@ -742,14 +730,14 @@ float功能
  * 不脱离文档流
  * 可以和滚动一起用
 
-<span style="color: orange;">**定位层级**</span>
+**定位层级**
   * z-index 调整元素层级
 
-<span style="color: orange;">**特殊应用**</span>
+**特殊应用**
   * 充满父元素 --- 没有长宽（无论超出不足）
   * 居中
 
-# 布局
+## 布局
 
 * 版心 固定宽度且水平居中的部分，用于展示主要内容，一般是多个
 
@@ -769,23 +757,27 @@ float功能
    * https://necolas.github.io/normalize.css/
 
 
-# css5
+## css5
 
-- <span style="color: #d48806;">**CSS3**</span>是<span style="color: #d48806;">**CSS2**</span>的升级版本，它在CSS2的基础上，<span style="color: #d48806;">**新增了很多强大的新功能**</span>，从而解决一些实际面临的问题。
-- CSS3在未来会按照<span style="color: #d48806;">**模块化的方式**</span>去发展：https://www.w3.org/Style/CSS/current-work.html
+- **CSS3**是**CSS2**的升级版本，它在CSS2的基础上，**新增了很多强大的新功能**，从而解决一些实际面临的问题。
+- CSS3在未来会按照**模块化的方式**去发展：https://www.w3.org/Style/CSS/current-work.html
+
+> [!NOTE]
+> CSS3 模块化後，可以按需加载相關子規範，讓瀏覽器實作與開發者學習都更聚焦；理解新增特性可顯著提升開發效率。
+
 - CSS3的新特性如下：
-  - 新增了更加实用的<span style="color: #d48806;">**选择器**</span>，例如：<span style="color: #d48806;">**动态伪类选择器、目标伪类选择器、伪元素选择器**</span>等等。
-  - 新增了更好的<span style="color: #d48806;">**视觉效果**</span>，例如：<span style="color: #d48806;">**圆角、阴影、渐变**</span>等。
-  - 新增了丰富的<span style="color: #d48806;">**背景效果**</span>，例如：<span style="color: #d48806;">**支持多个背景图片**</span>，同时新增了若干个背景相关的属性。
-  - 新增了全新的<span style="color: #d48806;">**布局方案**</span>——<span style="color: #d48806;">**弹性盒子**</span>。
-  - 新增了<span style="color: #d48806;">**Web字体**</span>，可以显示用户电脑上没有安装的字体。
-  - 增强了<span style="color: #d48806;">**颜色**</span>，例如：<span style="color: #d48806;">**HSL、HSLA、RGBA**</span>几种新的颜色模式，新增<span style="color: #d48806;">**opacity**</span>属性来控制透明度。
-  - 增加了<span style="color: #d48806;">**2D和3D变换**</span>，例如：<span style="color: #d48806;">**旋转、扭曲、缩放、位移**</span>等。
-  - 增加<span style="color: #d48806;">**动画与过渡效果**</span>，让效果的变换更具流线性、平滑性。
+  - 新增了更加实用的**选择器**，例如：**动态伪类选择器、目标伪类选择器、伪元素选择器**等等。
+  - 新增了更好的**视觉效果**，例如：**圆角、阴影、渐变**等。
+  - 新增了丰富的**背景效果**，例如：**支持多个背景图片**，同时新增了若干个背景相关的属性。
+  - 新增了全新的**布局方案**——**弹性盒子**。
+  - 新增了**Web字体**，可以显示用户电脑上没有安装的字体。
+  - 增强了**颜色**，例如：**HSL、HSLA、RGBA**几种新的颜色模式，新增**opacity**属性来控制透明度。
+  - 增加了**2D和3D变换**，例如：**旋转、扭曲、缩放、位移**等。
+  - 增加**动画与过渡效果**，让效果的变换更具流线性、平滑性。
 
 
 * 什么是私有前缀
-  如下代码中的 <span style="color: #d48806;">`-webkit-`</span> 就是私有前缀
+  如下代码中的 `-webkit-` 就是私有前缀
 
   ```css
   div {
@@ -796,10 +788,10 @@ float功能
   ```
 
 **常见**：
-- <span style="color: #d48806;">**Chrome浏览器**</span>：<span style="color: #d48806;">`-webkit-`</span>
-- <span style="color: #d48806;">**Safari浏览器**</span>：<span style="color: #d48806;">`-webkit-`</span>
-- <span style="color: #d48806;">**Firefox浏览器**</span>：<span style="color: #d48806;">`-moz-`</span>
-- <span style="color: #d48806;">**Edge浏览器**</span>：<span style="color: #d48806;">`-webkit-`</span>
+- **Chrome浏览器**：`-webkit-`
+- **Safari浏览器**：`-webkit-`
+- **Firefox浏览器**：`-moz-`
+- **Edge浏览器**：`-webkit-`
 
 ## 长度单位
 
@@ -1069,7 +1061,7 @@ background-image: linear-gradient(direction, color-stop1, color-stop2, ...);
 | position     | 可选   | 指定渐变圆心位置，支持三种形式：<br>- 关键词（center/top left/bottom right 等）<br>- 长度值（如 20px 30px，水平在前垂直在后）<br>- 百分比（如 50% 50%）<br>默认值为 center（容器正中心） |
 | color-stop   | 必需   | 渐变颜色节点，格式为「颜色值 + 位置」（位置可选）：<br>- 颜色值<br>- 位置：未指定时均匀分布<br>至少需包含 2 个颜色节点 |
 
-# CSS3 重复渐变属性
+## CSS3 重复渐变属性
 重复渐变包含重复线性渐变（repeating-linear-gradient）和重复径向渐变（repeating-radial-gradient），是 CSS3 扩展的渐变属性，可将基础渐变效果循环重复填充容器，需通过 `background-image` 或 `background` 属性应用。
 
 ## 核心语法
@@ -1538,7 +1530,7 @@ transform: scaleX(1.2) scaleZ(1.5);
 }
 ```
 
-# 伸缩盒模型
+## 伸缩盒模型
 1. 伸缩盒模型简介：
 
   2009年，W3C提出了一种新的盒子模型——Flexible Box（伸缩盒模型，又称：弹性盒子）。
@@ -1744,7 +1736,7 @@ order 属性
 2. `landscape`：视口处于横向，即宽度大于高度。
 
 
-# 1.5 结合外部样式的用法
+## 1.5 结合外部样式的用法
 
 ## 用法一：在 link 标签中使用
 
@@ -1764,7 +1756,7 @@ order 属性
 }
 ```
 
-# JavaScript
+## JavaScript
 
 - MDN文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Control_flow_and_error_handling
 - 菜鸟教程：https://www.runoob.com/js/js-howto.html
@@ -1872,7 +1864,7 @@ function letTest() {
 - 方法内容写到文档中
 - 查找对应的html标签：`getElementById("html-id属性")` 
 
-<span style="color: yellow;">**innerHTML**</span>（**是属性不是方法**）
+**innerHTML**（**是属性不是方法**）
 - 写入html文件中
 
 ---
