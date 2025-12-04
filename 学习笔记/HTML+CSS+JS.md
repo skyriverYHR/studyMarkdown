@@ -30,15 +30,19 @@
 > 理解标签的层级关系与属性配置是构建 HTML 结构的前提，任何布局与交互都以此为基础。
 
 * 文档声明
+
   ```html
   <!DOCTYPE html> 版本声明
   ```
+
 * 编码
+
   ```html
   <meta charset="">
   ```
 
 * 语言设置
+  
   ```html
   属性添加
   <html lang = "（语言）">
@@ -173,6 +177,7 @@
 
 * 常用控件
   - input
+
     ```html
     1.type
       - text 文本
@@ -190,17 +195,23 @@
     ```
 
   - button
+
     ```html
     1.submit
     2.reset 重置
     3.button 普通按钮
     ```
+
+
   - textarea
+
     ```html
     1.cols 列
     2.rows 行
     ```
+
   - select （下拉框）
+
     ```html
     <select>
       <option value="">选项内容</option>
@@ -209,12 +220,15 @@
 
     有value会取value
     ```
+
   - label 标签
+
     ```html
     1. for = "id" 连接组件
     ```
 
   - fieldset和legend (分组)
+
     ```html
     <fieldset>
       <legend>分组标题</legend>
@@ -229,24 +243,26 @@ iframe 属性
 
 ## 字符实体
 
-* &（字符名称）
+- &（字符名称）
+
   - 空格 &nbsp
   - 小于号 &lt
   - 大于号 &gt
   ....
 
 ## 全局属性 class
-* 用途
+
+- 用途
   - 分类
 
 ## meta 元信息
 
-* 编码 charset = ""
-* 兼容 + 版本 http-equiv = "" content = ""
-* 移动设备 name = "viewport" content = ""
-* 配置网页关键字 name = "description"
-* 针对搜索引擎爬虫 name = "robots" content = ""
-</details>
+- 编码 charset = ""
+- 兼容 + 版本 http-equiv = "" content = ""
+- 移动设备 name = "viewport" content = ""
+- 配置网页关键字 name = "description"
+- 针对搜索引擎爬虫 name = "robots" content = ""
+
 
 ## h5
 
