@@ -1,7 +1,8 @@
 
-# HTML
+# web开发笔记
 
-## 标签
+<details>
+<summary>## 标签</summary>
 
 ### 网页基本设置
 
@@ -252,6 +253,7 @@ iframe 属性
 - 配置网页关键字 name = "description"
 - 针对搜索引擎爬虫 name = "robots" content = ""
 
+</details>
 
 ## h5
 
