@@ -1,10 +1,7 @@
 
 # web开发笔记
 
-<details>
-<summary></summary>
-
-## 标签
+## 一、标签
 
 ### 网页基本设置
 
@@ -253,11 +250,9 @@ iframe 属性
 - 兼容 + 版本 http-equiv = "" content = ""
 - 移动设备 name = "viewport" content = ""
 - 配置网页关键字 name = "description"
-- 针对搜索引擎爬虫 name = "robots" content = ""
+- 针对搜索引擎爬虫 name = "robots" content 
 
-</details>
-
-## h5
+## 二、h5
 
 ### 新增布局标签
 
@@ -403,7 +398,7 @@ iframe 属性
 | **`preload`** | `auto` / `metadata` / `none` | 音频预加载，如果使用 autoplay，则忽略该属性。<br>• `none`：不预加载音频。<br>• `metadata`：仅预先获取音频的元数据（例如长度）。<br>• `auto`：可以下载整个音频文件，即使用户不希望使用它。 |
 
 
-## CSS 样式
+## 三、CSS 样式
 
 **参考文档**：MDN Web Docs CSS 标签网站
 
@@ -770,7 +765,7 @@ float功能
    * https://necolas.github.io/normalize.css/
 
 
-## css5
+## 四、css5
 
 - **CSS3**是**CSS2**的升级版本，它在CSS2的基础上，**新增了很多强大的新功能**，从而解决一些实际面临的问题。
 - CSS3在未来会按照**模块化的方式**去发展：https://www.w3.org/Style/CSS/current-work.html
@@ -1103,7 +1098,7 @@ background-image: repeating-radial-gradient(shape size at position, color-stop1,
   background-image: repeating-radial-gradient(circle at center, #ff6b6b 0%, #ff6b6b 5%, #fff 5%, #fff 10%);
   ```
 
-## Web字体（@font-face）完整介绍
+## 五、Web字体（@font-face）完整介绍
 一、核心概念
 通过`@font-face` CSS规则，可指定网页自定义字体文件的地址，浏览器会自动下载并应用该字体，无需依赖用户本地安装的字体，实现网页字体样式的个性化与统一性。
 
@@ -1266,9 +1261,9 @@ transform: translateX(100px) scale(0.8) rotate(-15deg);
 perspective-origin: x-axis y-axis;
 ```
 
-#### 3D 位移
+### 3D 位移
 
-## 基本概念
+#### 基本概念
 3D 位移是在 2D 位移的基础上，增加了让元素沿 **z 轴** 位移的能力。
 
 1. 先给元素添加 **转换属性** `transform`
@@ -1553,27 +1548,27 @@ transform: scaleX(1.2) scaleZ(1.5);
 
   伸缩盒模型的出现，逐渐演变出了一套新的布局方案——flex布局。
 
-### 伸缩容器、伸缩项目
+## 六、伸缩容器、伸缩项目
 
-#### 伸缩容器
+### 伸缩容器
 - **伸缩容器**：开启了 flex 的元素，就是伸缩容器。
 
 1. 给元素设置：`display: flex` 或 `display: inline-flex`，该元素就变为了伸缩容器。
 2. `display: inline-flex` 很少使用，因为可以给多个伸缩容器的父容器，也设置为伸缩容器。
 3. 一个元素可以同时是：伸缩容器、伸缩项目。
 
-#### 伸缩项目
+### 伸缩项目
 - **伸缩项目**：伸缩容器所有子元素自动成为了伸缩项目。
 
 1. 仅伸缩容器的子元素成为了伸缩项目，孙子元素、重孙子元素等后代，不是伸缩项目。
 2. 无论原来是哪种元素（块、行内块、行内），一旦成为了伸缩项目，全都会"块状化"。
 
-#### 主轴与侧轴
+### 主轴与侧轴
 
 *   **主轴**：伸缩项目沿着主轴排列，主轴默认是水平的，默认方向是：从左到右（左边是起点，右边是终点）。
 *   **侧轴**：与主轴垂直的就是侧轴，侧轴默认是垂直的，默认方向是：从上到下（上边是起点，下边是终点）。
 
-#### 主轴方向
+### 主轴方向
     *   **属性名**：`flex-direction`
     *   **常用值如下**：
 
@@ -1590,7 +1585,7 @@ flex-direction 属性图示：
 
 > **注意**：改变了主轴的方向，侧轴方向也随之改变。
 
-#### 主轴换行方式
+### 主轴换行方式
 
 *   **属性名**：`flex-wrap`
 *   **常用值如下**：
@@ -1615,7 +1610,7 @@ flex-direction 属性图示：
         flex-flow: row wrap;
         ```
 
-#### 主轴对齐方式
+### 主轴对齐方式
 
 - **属性名**: `justify-content`
 - **作用**: 设置伸缩项目在**主轴方向**上的对齐方式
@@ -1633,7 +1628,7 @@ flex-direction 属性图示：
 6. **`space-evenly`**：均匀分布，两端距离与中间距离一致。
    - 所有间隔（包括项目之间、项目与边框之间）都完全相等
 
-#### 侧轴对齐方式
+### 侧轴对齐方式
 
 
 **只有一行的情况**：
@@ -1650,7 +1645,7 @@ flex-direction 属性图示：
 5. **`stretch`**：如果伸缩项目未设置高度，将占满整个容器的高度。——（默认值）
 
 
-#### 多行的情况
+### 多行的情况
 
 - **所需属性**: `align-content`
 - **作用**: 设置多行伸缩项目在**侧轴方向**上的对齐方式
@@ -1665,7 +1660,7 @@ flex-direction 属性图示：
 6. **`space-evenly`**：在侧轴上完全平分。
 7. **`stretch`**：占满整个侧轴。——默认值
 
-#### flex-grow（伸）
+### flex-grow（伸）
 
 - `flex-grow` 定义伸缩项目的**放大比例**
 - **默认值为 `0`**：即纵使主轴存在剩余空间，也不拉伸（放大）
@@ -1680,13 +1675,13 @@ flex-direction 属性图示：
 .item3 { flex-grow: 1; }
 ```
 
-#### flex-shrink（缩）
+### flex-shrink（缩）
 
 - `flex-shrink` 定义了项目的**压缩比例**
 - **默认值为 `1`**：即如果空间不足，该项目将会缩小
 
 
-#### 复合属性 flex
+### 复合属性 flex
 
 
 `flex` 是复合属性，复合了：`flex-grow`、`flex-shrink`、`flex-basis` 三个属性
@@ -1717,7 +1712,7 @@ order 属性
 .item4 { order: -1; }  /* 排在最前（数值最小） */
 ```
 
-## 响应式布局
+## 七、响应式布局
 
 ### 媒体查询(@media)
 
@@ -1766,7 +1761,7 @@ order 属性
 }
 ```
 
-## JavaScript
+## 八、JavaScript
 
 - MDN文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Control_flow_and_error_handling
 - 菜鸟教程：https://www.runoob.com/js/js-howto.html
