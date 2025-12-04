@@ -3,18 +3,7 @@
 
 ## 标签
 
-- <>
-- '括号中的语句'
-
-基本架构语句：
-
-- html 包含整个页面
-- head 包含网页的元数据，如标题、字符集、样式表等
-- title 定义网页的标题，显示在浏览器标签上(一般包含在head中)
-- body 网页主体部分
-- !--(内容)-- 注释
-
-## 网页基本设置
+### 网页基本设置
 
 * **标签关系**
 
@@ -49,7 +38,7 @@
   ```
 
 
-## 标签
+### 基础标签
 
 * **语义化标签**
   - 可读性高
@@ -121,7 +110,7 @@
   <a href="javascript:js脚本;"></a> 刷新页面
   <a href="特定关键词：（）"></a> 跳转指定应用
   ```
-## 列表
+### 列表
 
 * 有序列表 `<ol>`
 * 无序列表 `<ul>`
@@ -134,7 +123,7 @@
   ```
 * 列表单元：只要包含在列表中用 `<li>` 包裹（除了自定义）
 
-## 表格
+### 表格
 
 * 格式
   ```html
@@ -162,7 +151,7 @@
   rowspan = "行数" 跨行
   ```
 
-## 表单
+### 表单
 
 实现用户和网站的交互界面
 
@@ -235,13 +224,13 @@
     </fieldset>
     ```
 
-## 框架结构
+### 框架结构
 
 用途：嵌入网页
 iframe 属性
 * src
 
-## 字符实体
+### 字符实体
 
 - &（字符名称）
 
@@ -250,12 +239,12 @@ iframe 属性
   - 大于号 &gt
   ....
 
-## 全局属性 class
+### 全局属性 class
 
 - 用途
   - 分类
 
-## meta 元信息
+### meta 元信息
 
 - 编码 charset = ""
 - 兼容 + 版本 http-equiv = "" content = ""
@@ -266,7 +255,7 @@ iframe 属性
 
 ## h5
 
-## 新增布局标签
+### 新增布局标签
 
 | 标签名    | 语义                                       | 单/双标签 |
 |-----------|--------------------------------------------|-----------|
@@ -280,11 +269,10 @@ iframe 属性
 | hgroup    | 包裹连续的标题，如文章主标题、副标题的组合（W3C 将其删除） | 双        |
 
 
-## 2.新增状态标签
+### 新增状态标签
 
 2.1 meter 标签
-
-- **语义**：定义已知范围内的标量测量。也被称为 **gauge**（尺度），双标签，例如：**电量、磁盘用量等**。
+- **语义**：定义已知范围内的标量测量。
 - **常用属性**如下：
 
 | 属性       | 值   | 描述       |
@@ -306,7 +294,7 @@ iframe 属性
 | **max**   | 数值 | 规定目标值。 |
 | **value** | 数值 | 规定当前值。 |
 
-## 3. 新增列表标签
+### 新增列表标签
 
 | 标签名    | 语义    | 单/双标签 |
 |---|---|---|
@@ -332,7 +320,7 @@ iframe 属性
 
 ```
 
-## 4. 新增文本标签
+### 新增文本标签
 
 4.1 文本注音
 
@@ -347,7 +335,7 @@ iframe 属性
   <rt>chī mèi wǎng liǎng</rt>
 </ruby>
 ```
-## 三、新增表单功能
+### 新增表单功能
 
 1. 表单控件新增属性
 
@@ -359,7 +347,7 @@ iframe 属性
 | **autocomplete** | 自动完成，可以设置为on或off，适用于文字输入类的表单控件。 |
 | **pattern** | 填写正则表达式，适用于文本输入类表单控件。<br>注意：密码输入框、多行输入框不可用，且空的输入框不会验证，往往与required配合。 |
 
-## 2. input 新增属性值
+### input 新增属性值
 
 | 属性名 | 功能 |
 |---|---|
@@ -376,13 +364,13 @@ iframe 属性
 | **`time`** | 时间选择框，默认值为空，表单提交时不会验证格式。 |
 | **`datetime-local`** | 日期-时间选择框，默认值为空，表单提交时不会验证格式。 |
 
-## 3. form 标签新增属性
+### form 标签新增属性
 
 | 属性名 | 功能 |
 |---|---|
 | **`novalidate`** | 如果给 form 标签设置了该属性，表单提交的时候不再进行验证。 |
 
-## 4. 新增视频标签
+### 新增视频标签
 **`<video>`** 标签用来定义视频，它是双标签。
 
 | 属性 | 值 | 描述 |
@@ -397,7 +385,7 @@ iframe 属性
 | **`poster`** | URL地址 | 视频封面 |
 | **`preload`** | `auto` / `metadata` / `none` | 视频预加载，如果使用 autoplay，则忽略该属性。<br>• `none`：不预加载视频。<br>• `metadata`：仅预先获取视频的元数据（例如长度）。<br>• `auto`：下载整个视频文件，即使用户不希望使用它。 |
 
-## 4. 音频标签
+### 音频标签
 
 **`<audio>`** 标签用来定义音频，它是双标签。
 
@@ -419,7 +407,7 @@ iframe 属性
 * 层叠性 （后的覆盖前的【权重相同】）
 * 继承性  （继承祖先元素的某些样式，优先最近的）
 
-## 选择器
+### 选择器
 内部样式格式
 ```html
 <style>
@@ -449,6 +437,7 @@ iframe 属性
   * 6.并集选择器 2~4无逗号连接 or的关系   ！！！
   * 7.后代选择器 （选中包裹的所有内容 空格）
   * 8.子代选择器 （专指下一代，跨代不行）
+
       ```html
       (元素)>[] !!![]中是所有子元素中查询的总体条件
       
@@ -472,14 +461,18 @@ iframe 属性
         <p>w</p>
       </div>
       ```
+
   * 9.兄弟选择器 +连接一个兄弟 （向下相邻的[一行]元素相同的，没有不变）~连接所有的
   * 10.属性选择器  [] 选中具有[]中的属性的元素
+
     ```css
       [属性^="值"] 以~开头
       [属性$="值"] 以~结尾
       [属性*="值"] 包含~
     ```
+
   * 12.伪类选择器（状态描述）
+
     ```css
     1.动态伪类
       （元素）:link 没有访问过的
@@ -534,7 +527,7 @@ iframe 属性
 * c：元素，伪元素
 * `!important;` 属性后 - 表示一定显示
 
-## 单位
+### 单位
 
 px 像素
 （x）em 当前（或前辈的）元素的font-size的x倍
@@ -543,8 +536,8 @@ px 像素
 
 特殊情况：
 - 百分比在某些属性中参考的是父元素的对应属性值
-## 文本属性
-### 颜色
+### 文本属性
+#### 颜色
 
 1.rgb（0，0，0） 分别表示红绿蓝三色的度数;
 2.rgba(0,0,0,0)   多一位控制透明度 
@@ -556,7 +549,7 @@ px 像素
 2.hsla(色相，饱和度，亮度，头，透明度)
 
 
-### 字体
+#### 字体
 
 字体大小 ```font-size:```
 
@@ -569,7 +562,7 @@ px 像素
 符合属性 ```font: 粗细 倾斜 大小 字体```
 
 
-### 文本
+#### 文本
 
 字母间距```letter-spacing```
 
@@ -596,7 +589,7 @@ px 像素
 
 行高：```line-height: normal/px/数字（基于font-size倍数）/百分比``` (字体是基于x放入方框进行调整的)
 
-### 列表样式
+#### 列表样式
 
 1.列表符号```list-style-type```
   ```flow
@@ -609,7 +602,7 @@ px 像素
 4.复合属性1~3```list-style:```
 
 
-### 表格样式
+#### 表格样式
 
 1.边框border：包含所有属性，**必须指定完整**
 
@@ -621,16 +614,16 @@ px 像素
 
 5.隐藏空的单元格```empty-cells:hide```
 
-### 背景样式
+#### 背景样式
 
 background: 颜色 图片 位置
 
-### 鼠标样式
+#### 鼠标样式
 
 cursor: pointer/move/wait/help; 
 
 
-## 显示模式
+### 显示模式
 
 * 块元素
   ```
@@ -657,13 +650,13 @@ cursor: pointer/move/wait/help;
 display：none/block/inline/inline-block
 visibility：visible/hidden;
 
-## 内容溢出问题 - overflow
+### 内容溢出问题 - overflow
   * hidden 隐藏
   * auto   自动
   * scroll 滚动条
 
 
-## 盒子模型
+### 盒子模型
 
 * 从外往里包裹成一个盒子margin是最外面的一层
   * margin（外边距）
@@ -682,7 +675,7 @@ visibility：visible/hidden;
 
   * 特点：都可以拆成上下左右
 
-## 问题：
+### 问题：
 1.塌陷问题
   给第一个子元素设置上margin最后一个子元素设置下margin会导致设置margin给父元素
 
@@ -701,7 +694,7 @@ visibility：visible/hidden;
   * 修改为块
   * 把字调没
 
-## 浮动
+### 浮动
 
 特点
 ```
@@ -724,7 +717,7 @@ float功能
   clear: left/right/both; 清除浮动兄弟的影响
   ```
 
-## 定位
+### 定位
 
 相对定位（相对于发生移动前原来的位置）
  * 开启相对定位：```position: relative;```
@@ -753,7 +746,7 @@ float功能
   * 充满父元素 --- 没有长宽（无论超出不足）
   * 居中
 
-## 布局
+### 布局
 
 * 版心 固定宽度且水平居中的部分，用于展示主要内容，一般是多个
 
@@ -809,7 +802,7 @@ float功能
 - **Firefox浏览器**：`-moz-`
 - **Edge浏览器**：`-webkit-`
 
-## 长度单位
+### 长度单位
 
 1. **rem** - 根元素字体大小的倍数，只与根元素字体大小有关。
 2. **vw** - 视口宽度的百分之多少，**10vw** 就是视口宽度的 10%。
@@ -817,17 +810,17 @@ float功能
 4. **vmax** - 视口宽高中大的那个的百分之多少。（了解即可）
 5. **vmin** - 视口宽高中小的那个的百分之多少。（了解即可）
 
-## 2. CSS3 新增颜色设置方式
+### CSS3 新增颜色设置方式
 
 CSS3 新增了三种颜色设置方式，分别是：**rgba**、**hsl**、**hsla**，由于之前已经详细讲解，此处略过。
 
-## 3. CSS3 新增选择器
+### CSS3 新增选择器
 
 CSS3 新增的选择器有：**动态伪类**、**目标伪类**、**语言伪类**、**UI伪类**、**结构伪类**、**否定伪类**、**伪元素**；这些在 CSS2 中已经详细讲解，此处略过。
 
-## 4.CSS3新增盒子属性
+### CSS3新增盒子属性
 
-### 1. **box-sizing** 怪异盒模型
+### **box-sizing** 怪异盒模型
 
 使用 **box-sizing** 属性可以设置盒模型的两种类型
 
@@ -836,7 +829,7 @@ CSS3 新增的选择器有：**动态伪类**、**目标伪类**、**语言伪�
 | **content-box** | **width** 和 **height** 设置的是盒子内容区的大小。（默认值） |
 | **border-box** | **width** 和 **height** 设置的是盒子总大小。（怪异盒模型） |
 
-### 2. **resize** 调整盒子大小
+### **resize** 调整盒子大小
 
 使用 **resize** 属性可以控制是否允许用户调节元素尺寸。
 
@@ -847,7 +840,7 @@ CSS3 新增的选择器有：**动态伪类**、**目标伪类**、**语言伪�
 | **horizontal** | 用户可以调节元素的宽度。 |
 | **vertical** | 用户可以调节元素的高度。 |
 
-### 3. **box-shadow** 盒子阴影
+### **box-shadow** 盒子阴影
 
 使用 **box-shadow** 属性为盒子添加阴影。
 
@@ -896,7 +889,7 @@ opacity 是一个属性，设置的是整个元素（包括元素里的内容）
 
 rgba 是颜色的设置方式，用于设置颜色，它的透明度，仅仅是调整颜色的透明度。
 
-## 5.CSS3新增背景属性
+### CSS3新增背景属性
 
 5.1. **background-origin**
 
@@ -961,13 +954,13 @@ background: url(../images/bg-lt.png) no-repeat,
           url(../images/bg-rb.png) no-repeat right bottom;
 ```
 
-## 6.圆角
+### 圆角
 
 ```css
 border-radius: 10px;
 ```
 
-## 7.轮廓
+### 轮廓
 
 轮廓属性：```outline: 50px solid blue;```
 
@@ -984,7 +977,7 @@ border-radius: 10px;
 **注意：** outline-offset 不是 outline 的子属性，是一个独立的属性。
 
 
-## CSS3新增文本属性
+### CSS3新增文本属性
 
 **文本阴影**
 - 在 CSS3 中，我们可以使用 `text-shadow` 属性给文本添加阴影。
@@ -1048,7 +1041,7 @@ border-radius: 10px;
 - **-webkit-text-stroke-color**：设置文字描边的颜色，写颜色值。
 - **-webkit-text-stroke**：复合属性，设置文字描边宽度和颜色。
 
-## CSS3 线性渐变属性
+### CSS3 线性渐变属性
 线性渐变（linear-gradient）是 CSS3 新增的背景渐变属性，用于创建沿直线方向过渡的颜色效果，需通过 `background-image` 或 `background` 属性应用。
 
 
@@ -1064,7 +1057,7 @@ background-image: linear-gradient(direction, color-stop1, color-stop2, ...);
 
 
 
-## CSS3 径向渐变属性
+### CSS3 径向渐变属性
 径向渐变（radial-gradient）是 CSS3 新增的背景渐变属性，以指定圆心为起点向四周扩散形成颜色过渡效果，需通过 `background-image` 或 `background` 属性应用。
 
 `background-image: radial-gradient(shape size at position, color-stop1, color-stop2, ...);`
@@ -1077,17 +1070,16 @@ background-image: linear-gradient(direction, color-stop1, color-stop2, ...);
 | position     | 可选   | 指定渐变圆心位置，支持三种形式：<br>- 关键词（center/top left/bottom right 等）<br>- 长度值（如 20px 30px，水平在前垂直在后）<br>- 百分比（如 50% 50%）<br>默认值为 center（容器正中心） |
 | color-stop   | 必需   | 渐变颜色节点，格式为「颜色值 + 位置」（位置可选）：<br>- 颜色值<br>- 位置：未指定时均匀分布<br>至少需包含 2 个颜色节点 |
 
-## CSS3 重复渐变属性
+### CSS3 重复渐变属性
 重复渐变包含重复线性渐变（repeating-linear-gradient）和重复径向渐变（repeating-radial-gradient），是 CSS3 扩展的渐变属性，可将基础渐变效果循环重复填充容器，需通过 `background-image` 或 `background` 属性应用。
 
-## 核心语法
-### 重复线性渐变
+#### 重复线性渐变
 background-image: repeating-linear-gradient(direction, color-stop1, color-stop2, ...);
 
-### 重复径向渐变
+#### 重复径向渐变
 background-image: repeating-radial-gradient(shape size at position, color-stop1, color-stop2, ...);
 
-## 关键参数说明
+#### 关键参数说明
 | 参数名       | 必要性 | 描述                                                                 |
 |--------------|--------|----------------------------------------------------------------------|
 | direction    | 可选   | 仅重复线性渐变，指定渐变方向，支持三种形式：<br>- 角度（如 45deg，0deg 为从下到上，90deg 为从左到右）<br>- 关键词（to right/left/top/bottom）<br>- 方位组合（to top right 等）<br>默认值为 to bottom（自上而下） |
@@ -1128,7 +1120,7 @@ background-image: repeating-radial-gradient(shape size at position, color-stop1,
 }
 ```
 
-## 字体图标
+### 字体图标
 
 字体生成：
 - 阿里字体定制工具：https://www.iconfont.cn/webfont
@@ -1141,8 +1133,8 @@ background-image: repeating-radial-gradient(shape size at position, color-stop1,
 * 使用建议
   - 不同平台字体图标使用方式存在差异，建议参考对应平台使用指南。实际开发中，阿里图标库（https://www.iconfont.cn/）是使用广泛的资源平台，可通过该平台筛选、下载、管理字体图标，满足网页、移动端等多场景需求。
 
-## 2D变换
-### 2D 位移 (Transform: Translate)
+### 2D变换
+#### 2D 位移 (Transform: Translate)
 
 **基本概念：**
 2D 位移可以改变元素的位置，具体使用方式如下：
@@ -1176,7 +1168,7 @@ transform: translate(30px, 40px);
 ```
 
 
-### 2D 缩放 (Transform: Scale)
+#### 2D 缩放 (Transform: Scale)
 
 * **基本概念**:
   2D缩放是指：让元素放大或缩小，具体使用方式如下：
@@ -1205,7 +1197,7 @@ transform: scale(1.2);        /* 水平和垂直都放大1.2倍 */
 transform: scale(1.5, 0.8);   /* 水平放大1.5倍，垂直缩小到0.8倍 */
 ```
 
-### 多重变换 (Multiple Transforms)
+#### 多重变换 (Multiple Transforms)
 
 **基本概念**
 多个变换可以同时使用一个 `transform` 属性来编写，实现复杂的组合效果。
@@ -1229,13 +1221,13 @@ transform: translateX(100px) scale(0.8) rotate(-15deg);
   * 先执行的操作会影响后续操作的坐标系
   * 旋转会改变元素的坐标轴方向，可能影响位移和缩放的效果
 
-## 3D变换
+### 3D变换
 
-### 开启 3D 空间
+#### 开启 3D 空间
 
 **重要原则**：元素进行 3D 变换的首要操作：父元素必须开启 3D 空间！
 
-### transform-style 属性
+#### transform-style 属性
 使用 `transform-style` 开启 3D 空间，可选值如下：
 
 | 值 | 描述 |
@@ -1260,7 +1252,7 @@ transform: translateX(100px) scale(0.8) rotate(-15deg);
 ```
 
 
-### 透视点位置 (perspective-origin)
+#### 透视点位置 (perspective-origin)
 
 **透视点位置** 就是观察者位置，默认的透视点在发生 3D 变换元素的**中心**。
 
@@ -1270,7 +1262,7 @@ transform: translateX(100px) scale(0.8) rotate(-15deg);
 perspective-origin: x-axis y-axis;
 ```
 
-### 3D 位移
+#### 3D 位移
 
 ## 基本概念
 3D 位移是在 2D 位移的基础上，增加了让元素沿 **z 轴** 位移的能力。
@@ -1298,7 +1290,7 @@ transform: translate3d(0, 0, 150px);         /* 仅 Z 轴位移 */
 transform: translateX(100px) translateZ(80px);
 ```
 
-### 3D 旋转
+#### 3D 旋转
 
 3D 旋转是在 2D 旋转的基础上，增加了让元素沿 **x 轴** 和 **y 轴** 旋转的能力。
 
@@ -1331,7 +1323,7 @@ transform: rotate3d(1, 1, 1, 30deg);    /* x、y、z 轴分别旋转 30 度 */
 transform: rotateX(45deg) rotateY(30deg);
 ```
 
-### 3D 缩放
+#### 3D 缩放
 3D 缩放是在 2D 缩放的基础上，增加了让元素沿 **z 轴** 缩放的能力。
 
 1. 先给元素添加 **转换属性** `transform`
@@ -1438,7 +1430,7 @@ transform: scaleX(1.2) scaleZ(1.5);
 在线制作贝塞尔曲线：https://cubic-bezier.com
 
 
-## 动画的基本使用
+### 动画的基本使用
 
 * 第一步：定义关键帧（定义动画）
   ```css
@@ -1493,7 +1485,7 @@ transform: scaleX(1.2) scaleZ(1.5);
   9. `cubic-bezier(number, number, number, number)`：特定的贝塞尔曲线类型。
 
 
-## 多列布局属性
+### 多列布局属性
 
 布局控制属性
   - **`column-count`**
@@ -1546,7 +1538,7 @@ transform: scaleX(1.2) scaleZ(1.5);
 }
 ```
 
-## 伸缩盒模型
+### 伸缩盒模型
 1. 伸缩盒模型简介：
 
   2009年，W3C提出了一种新的盒子模型——Flexible Box（伸缩盒模型，又称：弹性盒子）。
@@ -1557,22 +1549,22 @@ transform: scaleX(1.2) scaleZ(1.5);
 
   伸缩盒模型的出现，逐渐演变出了一套新的布局方案——flex布局。
 
-## 2. 伸缩容器、伸缩项目
+### 伸缩容器、伸缩项目
 
-### 伸缩容器
+#### 伸缩容器
 - **伸缩容器**：开启了 flex 的元素，就是伸缩容器。
 
 1. 给元素设置：`display: flex` 或 `display: inline-flex`，该元素就变为了伸缩容器。
 2. `display: inline-flex` 很少使用，因为可以给多个伸缩容器的父容器，也设置为伸缩容器。
 3. 一个元素可以同时是：伸缩容器、伸缩项目。
 
-### 伸缩项目
+#### 伸缩项目
 - **伸缩项目**：伸缩容器所有子元素自动成为了伸缩项目。
 
 1. 仅伸缩容器的子元素成为了伸缩项目，孙子元素、重孙子元素等后代，不是伸缩项目。
 2. 无论原来是哪种元素（块、行内块、行内），一旦成为了伸缩项目，全都会"块状化"。
 
-### 主轴与侧轴
+#### 主轴与侧轴
 
 *   **主轴**：伸缩项目沿着主轴排列，主轴默认是水平的，默认方向是：从左到右（左边是起点，右边是终点）。
 *   **侧轴**：与主轴垂直的就是侧轴，侧轴默认是垂直的，默认方向是：从上到下（上边是起点，下边是终点）。
@@ -1669,7 +1661,7 @@ flex-direction 属性图示：
 6. **`space-evenly`**：在侧轴上完全平分。
 7. **`stretch`**：占满整个侧轴。——默认值
 
-### flex-grow（伸）
+#### flex-grow（伸）
 
 - `flex-grow` 定义伸缩项目的**放大比例**
 - **默认值为 `0`**：即纵使主轴存在剩余空间，也不拉伸（放大）
@@ -1684,13 +1676,13 @@ flex-direction 属性图示：
 .item3 { flex-grow: 1; }
 ```
 
-### flex-shrink（缩）
+#### flex-shrink（缩）
 
 - `flex-shrink` 定义了项目的**压缩比例**
 - **默认值为 `1`**：即如果空间不足，该项目将会缩小
 
 
-### 复合属性 flex
+#### 复合属性 flex
 
 
 `flex` 是复合属性，复合了：`flex-grow`、`flex-shrink`、`flex-basis` 三个属性
@@ -1752,9 +1744,7 @@ order 属性
 2. `landscape`：视口处于横向，即宽度大于高度。
 
 
-## 1.5 结合外部样式的用法
-
-## 用法一：在 link 标签中使用
+### 在 link 标签中使用
 
 **用法一：在 link 标签中使用**
 ```html
@@ -1777,7 +1767,7 @@ order 属性
 - MDN文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Control_flow_and_error_handling
 - 菜鸟教程：https://www.runoob.com/js/js-howto.html
 
-## Node中的Python冲突问题
+### Node中的Python冲突问题
 - node自动安装的python和本地已有的python冲突
   ```
   1.创建环境（在您的项目文件夹中）：
@@ -1789,7 +1779,7 @@ order 属性
   deactivate
   ```
 
-## 规范
+### 规范
 - 统一在body或head底端不影响页面的可读性
 - body和head的区别
   - body中：在页面所有组件加载完成后下载脚本***（推荐）***
@@ -1805,7 +1795,7 @@ order 属性
     </html>
     ```
 
-## 数据类型
+### 数据类型
 
 * Number
 * BigInt 
@@ -1857,7 +1847,7 @@ function letTest() {
 }
 ```
 
-## 运算符
+### 运算符
 
 * +
   - 算数运算
@@ -1867,9 +1857,9 @@ function letTest() {
   
 
 
-## API
+### API
 
-### 输出
+#### 输出
 **console.log**
 - 日志输出->多用于测试
 
@@ -1884,7 +1874,7 @@ function letTest() {
 - 写入html文件中
 
 ---
-### 事件
+#### 事件
 
 ```<some-HTML-element some-event="JavaScript 代码">```
 
@@ -1909,7 +1899,7 @@ function letTest() {
   | `onload` | 浏览器已完成页面的加载 |
   
 
-### 字符串
+#### 字符串
 
 * 常见方法
   | 属性 | 描述 |
@@ -1943,7 +1933,7 @@ function letTest() {
 
 * 字符转换：https://www.runoob.com/js/js-type-conversion.html
 
-### 正则表达式
+#### 正则表达式
 
 * 修饰符
   |修饰符	|描述|
