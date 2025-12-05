@@ -1947,3 +1947,10 @@ function letTest() {
 var str = "Visit Runoob!"; 
 var n = str.search("Runoob");
 ```
+#### 表单
+
+> [!note]
+> `document.forms["myForm"]["fname"]`
+> `document.forms`表示搜素所有表单
+> []第一个表示要查找表单的名字
+> []第二个表示要查找表单内的标签
