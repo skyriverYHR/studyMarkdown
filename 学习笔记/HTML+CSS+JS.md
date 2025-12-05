@@ -1858,7 +1858,7 @@ function letTest() {
 
 ### API
 
-#### 输出
+#### 1.输出
 **console.log**
 - 日志输出->多用于测试
 
@@ -1873,7 +1873,7 @@ function letTest() {
 - 写入html文件中
 
 ---
-#### 事件
+#### 2.事件
 
 ```<some-HTML-element some-event="JavaScript 代码">```
 
@@ -1898,7 +1898,7 @@ function letTest() {
   | `onload` | 浏览器已完成页面的加载 |
   
 
-#### 字符串
+#### 3.字符串
 
 * 常见方法
   | 属性 | 描述 |
@@ -1932,7 +1932,7 @@ function letTest() {
 
 * 字符转换：https://www.runoob.com/js/js-type-conversion.html
 
-#### 正则表达式
+#### 4.正则表达式
 
 * 修饰符
   |修饰符	|描述|
@@ -1947,10 +1947,16 @@ function letTest() {
 var str = "Visit Runoob!"; 
 var n = str.search("Runoob");
 ```
-#### 表单
+#### 5.表单
+
+表单的使用：
+1. `document.forms["myForm"]["fname"]`  
+  - `document.forms`表示搜素所有表单
+  - []第一个表示要查找表单的名字
+  - []第二个表示要查找表单内的标签
 
 > [!note]
-> `document.forms["myForm"]["fname"]`
-> `document.forms`表示搜素所有表单
-> []第一个表示要查找表单的名字
-> []第二个表示要查找表单内的标签
+> 表单包括三种验证方式：
+> 1.内置方法验证
+> 2.函数
+> 3.正则表达式
