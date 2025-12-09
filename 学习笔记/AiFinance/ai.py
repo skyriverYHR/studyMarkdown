@@ -16,7 +16,7 @@ parser.add_argument('--data_name', type=str, default='bank_card_data.csv', help=
 args = parser.parse_args()
 
 file_name = os.path.join(args.root_path, args.data_name)
-with open(file_name, 'w', encoding='utf-8') as file:
+with open(file_name,'w', encoding='utf-8') as file:
     file.write('Sample Data')
     content = file.read()
 

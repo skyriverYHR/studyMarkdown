@@ -1803,7 +1803,7 @@ order 属性
 * Null  （值是null，明确变量之后会赋值，暂时为null）
 * Undefined (没有值（不是null），设计失误没赋值)
 * symbol
-* object (类似于map) `{key:value}`
+* object (类似于map和java类对象的结合) `{key:value}`
   - 方法
   ```javaScript
   //访问对象的方法
@@ -1821,10 +1821,18 @@ order 属性
 * Function(函数) `function name(){return}`
 
 ***变量声明***
-* var 初始化一个值(function内局部生效)
+* var 初始化一个值
 * let 声明一个块级作用域变量（只在 `{}` 中生效）
 * const 常量
 * 无类型 声明一个窗口（window全局变量 -> 可以window.name访问）
+
+> [!important]
+> var 和 let 在函数数中都只有局部的效果  
+> let 和 var 在声明时 let只能在声明的{}内访问，var无限制  
+
+> [!warning]
+> constant 在定义数组和对象时可以改变内容，但不可重新赋值
+
 ```javaScript
 //let 声明的变量只在其声明的块或子块中可用，这一点，与var相似。二者之间最主要的区别在于var声明的变量的作用域是整个封闭函数。
 function varTest() {
@@ -1856,7 +1864,7 @@ function letTest() {
   
 
 
-### API
+### 网页编程
 
 #### 1.输出
 **console.log**
@@ -1956,7 +1964,234 @@ var n = str.search("Runoob");
   - []第二个表示要查找表单内的标签
 
 > [!note]
-> 表单包括三种验证方式：
-> 1.内置方法验证
-> 2.函数
-> 3.正则表达式
+> 表单包括三种验证方式：  
+> 1.内置方法验证  
+> 2.函数  
+> 3.正则表达式  
+
+
+***验证约束***：
+```javascript
+checkValidity() //检验是否合法
+setCustomValidity() //自定错误，并且提示信息
+```
+> [!note]
+> `checkValidity()`主要目的是检查是否需要检查以及检查是否符合标准
+
+> [!warning]
+> `setCustomValidity()`是设置错误提示,待用时会自动把对应属性值修改为false，需要在使用时先进行判断，正确则清空提示，否则显示提示
+
+
+例子：
+```html
+<input id="pwd" type="password" placeholder="密码">
+<input id="confirm" type="password" placeholder="确认密码">
+<button type="submit">提交</button>
+```
+
+
+```javascript
+const pwd = document.getElementById('pwd');
+const confirm = document.getElementById('confirm');
+
+confirm.addEventListener('input', () => {
+  // ✅ 第一步：先清除之前的自定义错误（关键！）
+    confirm.setCustomValidity('');
+
+    // 第二步：检查是否匹配
+    if (confirm.value !== pwd.value) {
+      // ❌ 不匹配：手动设为无效
+      confirm.setCustomValidity('两次密码不一致');
+    }
+  });
+  // 如果匹配，上面 setCustomValidity('') 已经让它恢复有效
+```
+
+***约束验证 DOM 属性***
+|属性|描述|
+|:--|:--|
+|validity|	布尔属性值，返回 input 输入值是否合法|
+|validationMessage|	浏览器错误提示信息|
+|willValidate|	指定 input 是否需要验证|
+
+***Validity 属性***
+input 元素的 validity 属性包含一系列关于 validity 数据属性:
+
+|属性|	描述|
+|:--|:--|
+|customError|	设置为 true, 如果设置了自定义的 validity 信息。|
+|patternMismatch|	设置为 true, 如果元素的值不匹配它的模式属性|。
+|rangeOverflow|	设置为 true, 如果元素的值大于设置的最大值。|
+|rangeUnderflow|	设置为 true, 如果元素的值小于它的最小值。|
+|stepMismatch|	设置为 true, 如果元素的值不是按照规定的 step 属性设置。|
+|tooLong|	设置为 true, 如果元素的值超过了 maxLength 属性设置的长度。|
+|typeMismatch|	设置为 true, 如果元素的值不是预期相匹配的类型。|
+|valueMissing|	设置为 true，如果元素 (required 属性) 没有值。|
+|valid|	设置为 true，如果元素的值是合法的。|
+
+
+#### 6.this
+
+JavaScript 中 this 不是固定不变的，它会随着执行环境的改变而改变。
+- 在方法中，this 表示该方法所属的对象。
+- 如果单独使用，this 表示全局对象。
+- 在函数中，this 表示全局对象。
+- 在函数中，在严格模式下，this 是未定义的(undefined)。
+- 在事件中，this 表示接收事件的元素。
+- 类似 call() 和 apply() 方法可以将 this 引用到任何对象。
+
+> [!note]
+> this 关键字会指向上一层object类对象-> 函数不是对象所以指向windows 构造函数构造对象所以指向构造本身;
+
+#### 7.JSON
+
+JSON 语法规则
+- 数据为 键/值 对。
+- 数据由逗号分隔。
+- 大括号保存对象
+- 方括号保存数组
+
+|函数|	描述|
+|JSON.parse()|	用于将一个 JSON 字符串转换为 JavaScript 对象。|
+|JSON.stringify()|	用于将 JavaScript 值转换为 JSON 字符串。|
+
+#### 8.void
+* ***定义一个函数（返回（）内的内容）*** *
+```javascript
+void(func())
+javascript:void(func())
+```
+
+#### 异步编程
+
+1. AJAX
+---
+2. Promise
+  * Promise 是一个 ECMAScript 6 提供的类，目的是更加优雅地书写复杂的异步任务。
+
+Promise 有三种状态：
+- pending：初始状态，既不是成功，也不是失败状态
+- resolve：意味着操作成功完成
+- rejected：意味着操作失败
+
+运行流程：
+```javascript
+var Password = [11, 22, 33];
+
+function check(password) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Password.includes(password)) { // ✅ 修正拼写
+        resolve("匹配成功");
+      } else {
+        reject("输入错误"); // ✅ 不匹配时 reject，才能进 catch
+      }
+    }, 1000);
+  });
+}
+
+function push(password) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      Password.push(password);
+      resolve("密码已添加: " + password); // ✅ 必须 resolve
+    }, 1000);
+  });
+}
+
+// ===== 测试代码 =====
+let p = 123;
+
+check(p)
+  .then((message) => {
+    console.log(message); // 如果匹配成功，打印"匹配成功"
+  })
+  .catch((err) => {
+    console.log(err + "，正在注册...");
+    return push(p); // ✅ return Promise，让链继续
+  })
+  .then((result) => {
+    if (result) {
+      console.log(result); // 打印"密码已添加..."
+    }
+  })
+  .finally(() => {
+    console.log("complete");
+    console.log("当前密码列表:", Password);
+  });
+```
+
+async/await 语法:
+- ES2017 引入了 async/await，它建立在 Promise 之上，让异步代码看起来像同步代码一样。
+- 处理.then语句过多导致的可读性不强的问题
+
+- async 定义一个函数处理.then阶段的函数处理，需要时调用函数
+- await 处理线程的异步，等待线程的处理结果
+  ```javascript
+  <!-- 上方代码的async改进 -->
+  async function run(pass) {
+    try {
+      // 尝试检查密码
+      const message = await check(pass);
+      console.log(message); // 匹配成功
+    } catch (err) {
+      // 捕获 reject 的错误
+      console.log(err + "，正在注册...");
+      const registerResult = await push(pass);
+      console.log(registerResult);
+    } finally {
+      console.log("complete");
+      console.log("当前密码列表:", Password);
+    }
+  }
+  ```
+
+#### 函数
+
+函数类型：
+- ```function name()````正常的函数定义
+- ```constant function = (参数) => {代码}```匿名函数，变量调用和上面的类似 
+
+参数类型：
+- 显式参数:函数直接显示的参数
+- 隐式参数:函数自带的argument数组存储函数输入的参数
+
+> [!important]
+> 即使函数没有自定义参数，argument参数也会存储传入的参数
+
+函数调用：
+- 作为函数直接调用
+- 全局对象调用
+- 作为类方法调用
+- 构造函数调用
+- 函数方法调用
+  ```javascript
+  function myFunction(a, b) {
+    return a * b;
+  }
+  myObject = myFunction.call(myObject, 10, 2);     // 返回 20
+  ```
+
+****闭包****
+- 处理定义一个变量时所有函数都能修改的问题
+  ```javascript
+  function computeTimes(){
+    var times = 0;
+    return function (){
+      times++;
+      return times;
+    }
+  }
+  var add = computeTimes();
+  <!--  只调用一次computeTimes 将函数的方法返回给add  -->
+
+  var add = (function(){
+    var times = 0;
+    return function () {return times++;}
+  })();
+  <!-- 结尾括号为函数调用自身 -->
+  ```
+
+> [!warning]
+> 为什么不直接掉用computeTimes而是赋值给变量;
+> 直接调用会重复运行第一行代码,我们要做的是将内部的方法调出，保护内部的变量
