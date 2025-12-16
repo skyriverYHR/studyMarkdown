@@ -2062,7 +2062,7 @@ void(func())
 javascript:void(func())
 ```
 
-#### 异步编程
+#### 9.异步编程
 
 1. AJAX
 ---
@@ -2146,7 +2146,7 @@ async/await 语法:
   }
   ```
 
-#### 函数
+#### 10.函数
 
 函数类型：
 - ```function name()````正常的函数定义
@@ -2195,3 +2195,154 @@ async/await 语法:
 > [!warning]
 > 为什么不直接掉用computeTimes而是赋值给变量;
 > 直接调用会重复运行第一行代码,我们要做的是将内部的方法调出，保护内部的变量
+
+#### 11.类
+
+java 类似
+- 构造函数统一是constructor（）
+- 静态方法static修饰，类似javaprivate只能类内部访问
+
+#### DOM
+
+***当网页被加载时当网页被加载时，浏览器会创建页面的文档对象模型（Document Object Model）树***
+
+* 通过javascript操作html需要先查找元素
+- ```getElementById("id_name")``` 查id
+- ```fetElementsByTagName("tagName")``` 查标签名
+- ```getElementsByClassName("className")``` 查类名
+
+> [!important]
+> getElementsByTagName 和 getElementsByClassName 这两个方法查找多个 dom 元素，返回的是 htmlcollection 类型，是伪数组而不是真数组，故不能使用数组的方法。我们可以使用数组原型配合 slice 方法，利用 call，apply，bind 方法将伪数组转为真数组。  
+
+```javascript
+let y = document.getElementsByTagName("p");
+const trueArray = Array.from(y);
+```
+
+* 分配事件
+  - 名为 displayDate 的函数被分配给 id="myBtn" 的 HTML 元素。
+  - ```<script> document.getElementById("myBtn").onclick=function(){displayDate()}; </script>```
+
+* onload 和 onunload 
+  - 事件会在用户进入或离开页面时被触发。
+
+* onmouseover 和 onmouseout 
+  - 事件可用于在用户的鼠标移至 HTML 元素上方或移出元素时触发函数。
+
+* addEventListener() 
+  - 点击监听器
+
+* appendChild()、insertBefore()、replaceChild()
+  - 创建新的元素节点（插入到尾部，头部| 替换）
+  ```javascript
+  div id="div1">
+  <p id="p1">这是一个段落。</p>
+  <p id="p2">这是另外一个段落。</p>
+  </div>
+  
+  <script>
+  var para = document.createElement("p");  <!-- 获取需要创建的标签名称 -->
+  var node = document.createTextNode("这是一个新的段落。"); <!-- 创建文本内容 -->
+  para.appendChild(node); <!-- 把文本添加到para（新创建）的标签中>
+  
+  var element = document.getElementById("div1"); 
+  element.appendChild(para);  <!-- 把新的标签插入已有的标签中 -->
+  </script>
+  ```
+
+#### API/对象
+
+* prototype（原型对象）
+  - 已存在构造器的对象中是不能添加新的属性：
+  ```javascript
+  function Person(name) {
+    this.name = name;
+  }
+
+  Person.prototype.sayHello = function() {
+      console.log("Hello, my name is " + this.name);
+  };
+
+  let alice = new Person("Alice");
+  alice.sayHello(); // 输出: Hello, my name is Alice
+  ```
+
+* number对象
+  - 极大或极小的数字可通过科学（指数）计数法来写：
+    ```javascript
+    var y=123e5;    // 12300000
+    var z=123e-5;   // 0.00123
+    ```
+  - NaN 是一个数字值-当变量被赋值一个非数字的值时会赋值NaN
+    - isNaN（判断是否是NaN）
+  - 方法
+    |方法|	描述|
+    |:--|:--|
+    |Number.parseFloat()|	将字符串转换成浮点数，和全局方法 parseFloat() 作用一致。|
+    |Number.parseInt()	|将字符串转换成整型数字，和全局方法 parseInt() 作用一致。|
+    |Number.isFinite()	|判断传递的参数是否为有限数字。|
+    |Number.isInteger()	|判断传递的参数是否为整数。|
+    |Number.isNaN()	|判断传递的参数是否为 isNaN()。|
+    |Number.isSafeInteger()|判断传递的参数是否为安全整数。|
+
+    - toExponential 返回一个数的指数形式
+    - toFixed 返回一个数的小数形式（指定位数）
+
+* String对象
+  - .indexOf()查找指定字符串
+  - .match()函数用来查找字符串中特定的字符
+
+* Data - 日期类
+* Arrays - java类似
+* math
+* RegExp（是正则表达式（regular expression）的简写。）
+  - 创建一个正则表达
+    ```javascript
+    var patt=new RegExp(pattern,modifiers);
+    var patt=/pattern/modifiers;
+    ```
+  - modifiers(修饰符)
+    - i-修饰符是用来执行不区分大小写的匹配。
+    - g-修饰符是用于执行全文的搜索（而不是在找到第一个就停止查找,而是找到所有的匹配）
+  - 方法
+   - test()方法搜索字符串指定的值，根据结果并返回真或假。
+   - exec() 方法检索字符串中的指定值。返回值是被找到的值。如果没有发现匹配，则返回 null。
+  
+### BOM
+
+浏览器对象模型 (BOM) 使 JavaScript 有能力与浏览器"对话"。
+
+属性
+- window.screen 对象包含有关用户屏幕的信息。
+- window.location 对象在编写时可不使用 window 这个前缀。
+- window.history 对象包含浏览器的历史。
+- window.navigator 对象包含有关访问者浏览器的信息。
+- JavaScript 弹窗
+  - alter
+  - comfirm
+  - prompt
+- JavaScript 计时事件
+  - setInterval() - 间隔指定的毫秒数不停地执行指定的代码。
+  - setTimeout() - 在指定的毫秒数后执行指定代码。
+- Cookie 用于存储 web 页面的用户信息。(网站自动登录)
+  - 创建一个cookie对象存储到网页中 ```document.cookie="username=John Doe";``` 
+  - 获取所有的cookie对象 ```var x = document.cookie;``` 返回一个对象
+
+- [!waring]
+- 来自 navigator 对象的信息具有误导性，不应该被用于检测浏览器版本，这是因为：  
+- navigator 数据可被浏览器使用者更改  
+- 一些浏览器对测试站点会识别错误  
+- 浏览器无法报告晚于浏览器发布的新操作系统  
+
+- [!waring]
+- Cookie 本身是一种通用的 Web 技术标准（由 HTTP 协议定义），所有网站和浏览器都遵循它。  
+- 但每个用户（访问者）获得的 Cookie 内容通常是不同的，而且彼此隔离。
+
+### javascript库（框架）
+
+* jQuery
+* Prototype
+  - API 是应用程序编程接口（Application Programming Interface）的缩写。它是包含属性和方法的库，用于操作 HTML DOM。Prototype 通过提供类和继承，实现了对 JavaScript 的增强。
+* MooTools
+
+*** 导入库 script标签src = ”引入地址“
