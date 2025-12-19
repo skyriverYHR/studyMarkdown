@@ -129,9 +129,28 @@
   ```html
   <table>
     <caption>标题</caption>
-    <thead>表格头部（列）th 列</thead>
-    <tbody>主体   <tr> 行 <td>元素</td></tr></tbody>
-    <tfoot>脚注</tfoot>
+    <!-- 表格头部标题行 -->
+    <thead>
+      <!-- 行包裹块 -->
+      <tr>
+        <!-- 每一行 -->
+        <th>列1</th>
+        <th>列2</th>
+      </tr>
+    </thead>
+    <!-- 表格元素 -->
+    <tbody>
+      <!-- 每一行的每一个单元格 -->
+      <tr>
+        <td>元素1</td>
+        <td>元素2</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2">脚注</td>
+      </tr>
+    </tfoot>
   </table>
   ```
 
@@ -268,6 +287,7 @@ iframe 属性
 | hgroup    | 包裹连续的标题，如文章主标题、副标题的组合（W3C 将其删除） | 双        |
 
 
+
 ### 新增状态标签
 
 2.1 meter 标签
@@ -396,6 +416,47 @@ iframe 属性
 | **`muted`** | - | 音频静音 |
 | **`loop`** | - | 循环播放 |
 | **`preload`** | `auto` / `metadata` / `none` | 音频预加载，如果使用 autoplay，则忽略该属性。<br>• `none`：不预加载音频。<br>• `metadata`：仅预先获取音频的元数据（例如长度）。<br>• `auto`：可以下载整个音频文件，即使用户不希望使用它。 |
+
+### 模板（抽象属性的一种体现）
+
+> [!important]
+> 用于减少重复的页面渲染代码
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Template 简单示例</title>
+  </head>
+  <body>
+
+    <!-- 1. 定义模板 -->
+    <template id="name-item">
+      <li class="person"></li>
+    </template>
+
+    <!-- 2. 准备容器 -->
+    <ul id="name-list"></ul>
+
+    <script>
+      // 3. 数据
+      const names = ["张三", "李四", "王五"];
+
+      // 4. 获取模板和容器
+      const template = document.getElementById('name-item').content;
+      const list = document.getElementById('name-list');
+
+      // 5. 循环渲染
+      names.forEach(name => {
+        const clone = document.importNode(template, true); // 克隆模板
+        clone.querySelector('.person').textContent = name; // 填数据
+        list.appendChild(clone);                           // 插入页面
+      });
+    </script>
+
+  </body>
+</html>
+```
 
 
 ## 三、CSS 样式

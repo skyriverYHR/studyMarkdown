@@ -191,25 +191,32 @@ __(2)字符串比较__
 ***
 # 多态
 
-## 使用方法
+使用方法
     public void register(Person p){
         p.show()                   
     }                              
 继承Person类的子类都可以通过赋值给Person p 调用对应的show方法
 
-## 条件
+条件
 1.有继承关系
 2.有父类引用指向子类对象
 3.方法重写
 
-## 多态方式调用成员变量和方法
-
+多态方式调用成员变量和方法
 1.编译看左边，运行也看左边(成员变量)————直接看父类的变量
 2.编译看左边，运行也看右边(成员方法)————子类重写覆盖父类
 
-多态创建对象 “父类” 父类名 = new “子类”
+***多态创建对象 “父类” 父类名 = new “子类”***
 
-## <font color = "orange">静态代码块</font>
+优缺点：
+1.优点
+   
+（1）利于维护
+__<span style="color:red">（2）调用方法时可以传递所有的子类对象</span>__
+2.缺点
+    <font color = "orange">（1）方法调用时，无法调用子类的特有方法，因为编译时会先检查父类中是否有这个方法。</font>
+
+## ***<font color = "orange">静态代码块</font>***
 ```java
 static{
     ....
@@ -220,7 +227,7 @@ static{
 用途：
 - 线程池，数据库连接池管理 ->只在首次需要时创建一个集中管理的类
     
-## <font color = "orange">泛型</font>
+## ***<font color = "orange">泛型</font>***
 <font color = "lightblue">Java 泛型主要用于解决 类型系统（Type System） 的问题：如何在不丢失类型安全的前提下，编写可处理多种数据类型的通用代码</font>
 
 
@@ -232,13 +239,6 @@ static{
   a = 1 此时 T -> int 类型
   ```
 
-## 优缺点
-1.优点
-   
-（1）利于维护
-__<span style="color:red">（2）调用方法时可以传递所有的子类对象</span>__
-    2.缺点
-    <font color = "orange">（1）方法调用时，无法调用子类的特有方法，因为编译时会先检查父类中是否有这个方法。</font>
 
 
 ***
@@ -288,13 +288,45 @@ __<span style="color:red">（2）调用方法时可以传递所有的子类对�
             pp.processorPayment(new PayPalPaymentMethod(),1000);
         }
     }
-
 ```
-### 接口中的成员
 
-成员变量：默认修饰public static final
-构造方法：无
-成员方法：都行
+## ***接口做返回类型***
+
+- [!important]
+- 限制返回值为实现该接口的子类  
+- 返回的子类只能调用该接口的方法-实现低耦合
+
+```java
+// 1. 定义一个带泛型的接口（功能是实现写入数据的读出）
+public interface Imputment<T> {
+    T imput();  // 返回类型是 T，由使用者决定
+}
+// 返回String
+public class StringImputment implements Imputment<String> {
+    @Override
+    public String imput() {
+        return "Hello, World!";
+    }
+}
+
+//返回Integer
+public class NumberImputment implements Imputment<Integer> {
+    @Override
+    public Integer imput() {
+        return 42;
+    }
+}
+
+public static <T> void printResult(Imputment<T> input) {
+    T result = input.imput();
+    System.out.println("结果: " + result);
+}
+
+// 调用
+printResult(new StringImputment());  // 输出: 结果: Hello, World!
+printResult(new NumberImputment());  // 输出: 结果: 42
+```
+
 
 
 ***
