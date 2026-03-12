@@ -290,11 +290,12 @@ static{
     }
 ```
 
-## ***接口做返回类型***
+## ***接口约束函数***
 
+*尖括号在前*
 > [!important]
-> 限制返回值为实现该接口的子类  
-> 返回的子类只能调用该接口的方法-实现低耦合
+> 1.限制返回值为实现该接口的子类  
+> 2.返回的子类只能调用该接口的方法-实现低耦合
 
 ```java
 // 1. 定义一个带泛型的接口（功能是实现写入数据的读出）
@@ -325,6 +326,19 @@ public static <T> void printResult(Imputment<T> input) {
 // 调用
 printResult(new StringImputment());  // 输出: 结果: Hello, World!
 printResult(new NumberImputment());  // 输出: 结果: 42
+```
+
+*尖括号在后*
+> [!important]
+> 限制传入参数的返回类型
+
+```java
+/**
+ * @<AnyType extends ...> 必须继承...
+ * @Comparable<? super AnyType> 必须返回实现了Comparable的类或者是父类
+ * @AnyType返回一个任意类型
+**/
+public static <AnyType extends Comparable<? super AnyType>> AnyType findMax(AnyType[] arr)
 ```
 
 
@@ -1221,57 +1235,56 @@ flowchart TD
 
 # JDBC（数据库操作语句）
 
-<font color = "lightyellow">核心API</font>
-* Connection
-  ```java
-  //数据库连接的重要接口
+***1.Connection (连接管理)***
+数据库连接是操作的起点，负责建立物理通道和事务管理。
 
-  1.连接：url：jdbc：（连接的是什么数据库）：//数据库ip：端口//数据库名称
-  2.事务管理
-  3.可以创建Statement进行数据库操作
-  ```
+  * 连接字符串 (URL): jdbc:mysql://IP地址:端口/数据库名?参数
 
-* Statement(有条件容易产生SQL注入攻击，一般不用) ->(后期学习现代数据库操作写法)
-  ```java
-  操作数据库并且返回一个结果对象
-  ```
+    * 常用参数：useSSL=false (关闭安全连接), serverTimezone=UTC (设置时区)。
 
-* PreapareStatement(statement子类，防止sql注入)
-  ```floq
-  1.动态编写用？号占位
-  2.在获结果时要先调用set类型方法给？赋值（下标【第几个数据】，查询的值）
-  ```
+  * 事务管理:
 
-* ResultSet
-  ```java
-  保存查询结果
-  ```
+    * ```setAutoCommit(false)```: 开启手动事务（转账等原子操作必用）。
 
-* 实体类
-  ```java
-    一个表对应一个类，一行数据对饮一个对象，一个属性对应一个数据
-    ```
-* 主键回显
-  ```java
-  新插入的数据，马上就要修改
-  （账号注册后，设置账号昵称）
+    * ```commit()```: 提交事务。
 
-  connect.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS) 告知需要主键
+    * ```rollback()```: 发生异常时回滚。
 
-  由执行语句执行.getGeneratedKeys();获取主键
-  ```
+  * 资源关闭: 它是重量级资源，必须在使用完毕后关闭。
 
-* 批量操作
-  ```java
-  1.获取连接新增批量操作设置
-  "jdbc:mysql:///zenless_zone_zero（？rewriteBatchedStatements=ture"
 
-  2.更改插入语句 ->符合sql批量插入
+***2.Statement 家族 (执行对象)***
+  |特性| Statement|PreparedStatement (推荐)|
+  |:--|:--|:--|
+  |原理|拼接 SQL 字符串，直接发送。|SQL 预编译，通过 ? 占位。|
+  |安全性|存在 SQL 注入风险。|防止 SQL 注入（自动处理特殊字符）。|
+  |效率|低（每次都要编译）。|高（预编译一次，多次执行）。|
+  |用法|execute(sql)|setXxx(index, value) |赋值后执行。|
 
-  3.preparedStatement.addBach 添加批处理
 
-  4. excuteBach 批量执行
-  ```
+***3.ResultSet (结果集处理)***
+保存查询返回的数据行。
+* 遍历方式: 使用 ```while(rs.next())。next()``` 方法既判断是否有下一行，又会将指针向下移动。
+* 获取数据:通过列名：```rs.getString("username")```（推荐，可读性好）。通过索引：rs.getInt(1)。
+
+***4.实体类 (POJO / Entity)*** 
+ORM (对象关系映射) 的初步思想。
+* 映射规则:
+  * 类 ```$\rightarrow$ 表
+  * 属性 $\rightarrow$ 字段
+  * 实例对象 $\rightarrow$ 一行记录
+  * 集合 (List<Entity>) $\rightarrow$ 多行记录
+
+
+> [!important]
+> 大幅提升海量数据插入效率。
+> 配置: URL 必须加上 ?rewriteBatchedStatements=true。  
+> 流程:
+> conn.setAutoCommit(false) (建议关闭自动提交以提升性能)。  
+> pstmt.addBatch()：将 SQL 加入缓冲区。  
+> pstmt.executeBatch()：一次性发送给数据库。  
+> conn.commit()：手动提交。  
+
 
 * 连接池
   ```java
@@ -1454,3 +1467,434 @@ flowchart TD
 7.getMothed（string name，Class... T）  返回Methon对象，对象形参类型为param Type
 8.Field[] getDeclearedFields()      返回Field对象的一个数组
 ```
+
+
+# web后端
+
+## socket
+
+* 要创建一个 Socket 连接，你需要指定服务器的地址和端口：
+  ```java
+    try {
+        // 连接到 localhost 的 8080 端口
+        Socket socket = new Socket("localhost", 8080);
+    
+        // 使用 socket 进行通信...
+    
+        // 关闭连接
+        socket.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    ```
+
+|方法|描述|
+|:--|:--|
+|getInputStream()|	获取输入流，用于接收数据|
+|getOutputStream()|	获取输出流，用于发送数据|
+|close()|	关闭 Socket 连接|
+|isConnected()|	检查连接是否已建立|
+|setSoTimeout(int timeout)|	设置超时时间（毫秒）|
+
+* 多线程
+  - socket循环内无线接收
+  - 接收到连接抛出给新的线程解决
+  - 线程中定义统一的方法
+
+
+一、基础网络与通信模型
+  * TCP/IP 协议栈
+  * TCP vs UDP（Web 用 TCP）
+  * 三次握手 / 四次挥手
+  * 端口（Port）的作用（如 80、443、8080）
+  * Socket 编程基础
+    * ServerSocket：监听连接
+    * Socket：代表一个客户端连接
+    * InputStream / OutputStream：读写数据
+  * 阻塞 I/O（BIO）模型
+    * accept()、read()、write() 默认都是阻塞的
+    * “每连接一线程”（Thread-per-Connection）模型
+    * 线程创建开销与 C10K 问题
+  * 并发处理策略
+    * 多线程（new Thread()）
+    * 线程池（ExecutorService）→ 控制资源
+    * 异步 I/O（NIO）→ Reactor 模式（进阶）
+
+二、***HTTP 协议核心***（处理请求的关键）
+  * HTTP 请求/响应结构
+    * 请求行：GET /index.html HTTP/1.1
+    * 响应行：HTTP/1.1 200 OK
+    * Header 字段（Host, Content-Type, Content-Length 等）
+    * 空行 \r\n\r\n 分隔 Header 和 Body
+    * Body（可选）
+  * 常见 HTTP 方法
+    * GET（获取资源）
+    * POST（提交数据）
+    * PUT / DELETE（RESTful）
+    * HEAD（只获取 Header）
+  * 状态码分类
+    * 2xx 成功（200 OK）
+    * 3xx 重定向（301, 302）
+    * 4xx 客户端错误（400, 404, 405）
+    * 5xx 服务器错误（500, 502）
+  * Header 关键字段
+    * Content-Type：声明 body 类型（text/html, application/json）
+    * Content-Length：body 字节数（必须准确！）
+    * Connection: keep-alive / close
+    * Host（HTTP/1.1 必须）
+  * URL 解析
+    * 路径（Path）：/api/user
+    * 查询参数（Query）：?id=123&name=Tom
+    * 解码 %20 → 空格（URLDecoder）
+
+三、Web 服务器核心功能实现
+  * 请求解析器（Request Parser）
+    * 读取并解析请求行
+    * 解析 Headers（按行读，直到空行）
+    * 读取 Body（根据 Content-Length 或 Chunked）
+  * 路由（Routing）
+    * 根据路径分发请求（if-else / Map / 注解）
+    * 支持动态路径（如 /user/{id}）
+  * 响应生成器（Response Builder）
+    * 构造合法 HTTP 响应
+    * 自动设置 Content-Length
+    * 支持不同 Content-Type
+  * 静态文件服务
+    * 读取本地文件（如 public/index.html）
+    * 根据扩展名设置 Content-Type（.css → text/css）
+    * 处理 404（文件不存在）
+  * 动态内容生成
+    * 模板渲染（简单字符串替换）
+    * 返回 JSON（{"time": "2025-12-27"}）
+    * 时间、数据库查询等
+
+四、健壮性与安全
+  * 异常处理
+    * 捕获 IOException 防止线程崩溃
+    * 资源释放（try-with-resources 关闭 Socket）
+  * 输入校验
+    * 路径遍历攻击防护（如 ../etc/passwd）
+    * 限制请求大小（防 OOM）
+  * 编码一致性
+    * 全程使用 UTF-8
+    * 避免系统默认编码导致乱码
+  * 超时控制
+    * Socket.setSoTimeout() 防止 hang 住
+
+
+## web项目
+
+idea配置web项目
+* 配置web架构
+  * 在项目文件下-点击右上角的搜素(搜add framework support)
+  * 添加web项目
+* 配置Tomcat
+  * 在运行配置中添加本地Tomcat
+  * 设置虚拟机配置 -Dfile.endcoding=UTF-8 解决编码问题
+  * 部署中添加项目文件夹
+  > [!waring]
+  > 项目文件是web文件目录，不是你自己创建命名的项目目录
+
+### servlet
+
+* init（核心）
+  * 每一个用户请求都会产生一个新的线程
+* service
+  *  service() 方法由容器调用,无需操作
+* doGet() 
+  * 接收浏览器地址栏请求
+* doPost()
+  * 接收浏览器html请求
+  > [!Tip]
+  > ```public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {doGet(request, response); }```
+  > ```doPost```可以直接通过```doGet```的嵌套进行相同的处理
+* destroy()
+  * 回收资源，确保数据安全
+* @WebServlet("网页路径")
+  * 通过注解省略了繁琐的web.html编辑
+  * ***注解的路径对应可以一对一，也可以一对多，即一个类处理一类路径***
+* form表单属性
+  * acton - 定义表单提交到对应的路径处理
+  * method - 定义表单的提交方式（常用：GET/POST）
+  * target 属性用于指定在何处显示表单提交后服务器返回的响应。
+    |值	|描述|
+    |:--|:--|
+    |_self	|默认值。在同一个框架或窗口中显示响应（覆盖当前页面）|
+    |_blank	|在新窗口或新标签页中打开响应|
+    |_parent|	在父框架集中显示响应（如果当前框架有父框架）|
+    |_top	|在整个窗口中显示响应（会跳出所有框架）|
+    |framename|	在指定的 `<iframe>` 或框架中显示响应（需要指定框架的 name 属性）|
+
+
+#### 方法
+
+```request.getContentType() ```是 HttpServletRequest 接口中的一个方法，用于获取请求头中的 Content-Type 字段值。
+* application/x-www-form-urlencoded：HTML 表单默认的提交类型
+* multipart/form-data：文件上传时使用的类型
+* application/json：JSON 数据
+* text/xml 或 application/xml：XML 数据
+
+```request.getParameter("键") ```是 HttpServletRequest 接口中的一个方法，用于获取 HTTP 请求中的参数值。
+
+#### 表头
+
+> [!important]
+> 请求和响应头是前端html，css，js和后端java（其他语言）的交流桥梁
+
+##### HTTP请求表头
+
+***当浏览器请求网页时，它会向 Web 服务器发送特定信息，这些信息不能被直接读取，因为这些信息是作为 HTTP 请求的头的一部分进行传输的。***
+
+
+|头信息|	描述|
+|:--|:--|
+|Accept	|这个头信息指定浏览器或其他客户端可以处理的 MIME 类型。值 image/png 或 image/jpeg 是最常见的两种可能值。|
+|Accept-Charset|	这个头信息指定浏览器可以用来显示信息的字符集。例如 ISO-8859-1。|
+|Accept-Encoding|	这个头信息指定浏览器知道如何处理的编码类型。值 gzip 或 compress 是最常见的两种可能值。|
+|Accept-Language|	这个头信息指定客户端的首选语言，在这种情况下，Servlet 会产生多种语言的结果。例如，en、en-us、ru 等。|
+|Authorization|	这个头信息用于客户端在访问受密码保护的网页时识别自己的身份。|
+|Connection	|这个头信息指示客户端是否可以处理持久 HTTP 连接。持久连接允许客户端或其他浏览器通过单个请求来检索多个文件。值 Keep-Alive 意味着使用了持续连接。|
+|Content-Length|	这个头信息只适用于 POST 请求，并给出 POST 数据的大小（以字节为单位）。|
+|Cookie	|这个头信息把之前发送到浏览器的 cookies 返回到服务器。|
+|Host	|这个头信息指定原始的 URL 中的主机和端口。|
+|If-Modified-Since	|这个头信息表示只有当页面在指定的日期后已更改时，客户端想要的页面。如果没有新的结果可以使用，服务器会发送一个 304 代码，表示 Not Modified 头信息。|
+|If-Unmodified-Since|	这个头信息是 If-Modified-Since 的对立面，它指定只有当文档早于指定日期时，操作才会成功。|
+|Referer|	这个头信息指示所指向的 Web 页的 URL。例如，如果您在网页 1，点击一个链接到网页 2，当浏览器请求网页 2 时，网页 1 的 URL 就会包含在 Referer 头信息中。|
+|User-Agent|	这个头信息识别发出请求的浏览器或其他客户端，并可以向不同类型的浏览器返回不同的内容。|
+
+**方法**:```https://www.runoob.com/servlet/servlet-client-request.html```
+
+* 获取读取请求头
+  ```java
+  // 获取单个请求头
+  String userAgent = request.getHeader("User-Agent");
+  String acceptLanguage = request.getHeader("Accept-Language");
+
+  // 获取所有请求头
+  java.util.Enumeration<String> headerNames = request.getHeaderNames();
+
+  // 获取指定名称的所有值（如多个Cookie）
+  java.util.Enumeration<String> headers = request.getHeaders("Accept-Encoding");
+  ```
+
+
+
+##### HTTP响应头
+
+|头信息|	描述|
+|:--|:--|
+|Allow	|这个头信息指定服务器支持的请求方法（GET、POST 等）。|
+|Cache-Control|	这个头信息指定响应文档在何种情况下可以安全地缓存。可能的值有：public、private 或 no-cache 等。Public 意味着文档是可缓存，Private 意味着文档是单个用户私用文档，且只能存储在私有（非共享）缓存中，no-cache 意味着文档不应被缓存。|
+|Connection	|这个头信息指示浏览器是否使用持久 HTTP 连接。值 close 指示浏览器不使用持久 HTTP 连接，值 keep-alive 意味着使用持久连接。|
+|Content-Disposition|	这个头信息可以让您请求浏览器要求用户以给定名称的文件把响应保存到磁盘。|
+|Content-Encoding	|在传输过程中，这个头信息指定页面的编码方式。|
+|Content-Language	|这个头信息表示文档编写所使用的语言。例如，en、en-us、ru 等。|
+|Content-Length	|这个头信息指示响应中的字节数。只有当浏览器使用持久（keep-alive）HTTP 连接时才需要这些信息。|
+|Content-Type	|这个头信息提供了响应文档的 MIME（Multipurpose Internet Mail Extension）类型。|
+|Expires	|这个头信息指定内容过期的时间，在这之后内容不再被缓存。|
+|Last-Modified|	这个头信息指示文档的最后修改时间。然后，客户端可以缓存文件，并在以后的请求中通过 If-Modified-Since 请求头信息提供一个日期。|
+|Location	|这个头信息应被包含在所有的带有状态码的响应中。在 300s 内，这会通知浏览器文档的地址。浏览器会自动重新连接到这个位置，并获取新的文档。|
+|Refresh|	这个头信息指定浏览器应该如何尽快请求更新的页面。您可以指定页面刷新的秒数。|
+|Retry-After|	这个头信息可以与 503（Service Unavailable 服务不可用）响应配合使用，这会告诉客户端多久就可以重复它的请求。|
+|Set-Cookie	|这个头信息指定一个与页面关联的 cookie。|
+
+设置响应表头
+  ```java
+  // 设置响应头
+  response.setHeader("Content-Type", "text/html;charset=UTF-8");
+  response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  response.setHeader("Pragma", "no-cache");
+  response.setDateHeader("Expires", 0);
+
+  // 添加多个相同名称的响应头
+  response.addHeader("Set-Cookie", "user=John");
+  response.addHeader("Set-Cookie", "session=abc123");
+
+  // 设置内容类型和编码（常用简写）
+  response.setContentType("text/html;charset=UTF-8");
+  ```
+
+#### 状态码
+
+熟悉的404，400等用于标记请求端接收数据的程度和状态
+
+状态码：```https://www.runoob.com/servlet/servlet-http-status-codes.html```
+
+|方法|描述|
+|:--|:--|
+|public void setStatus ( int statusCode )| 该方法设置一个任意的状态码。如果响应包含了一个特殊的状态码和文档，确保在使用 PrintWriter 实际返回任何内容之前调用 setStatus。|
+|public void sendRedirect(String url) |该方法生成一个 302 响应，连同一个带有新文档 URL 的 Location 头。|
+|public void sendError(int code, String message) |该方法发送一个状态码（通常为 404），连同一个在 HTML 文档内部自动格式化并发送到客户端的短消息。|
+
+#### 过滤器
+***`过滤器是一个实现了 javax.servlet.Filter 接口的 Java 类。动态拦截请求和响应***
+
+* 身份验证过滤器（Authentication Filters）。
+* 数据压缩过滤器（Data compression Filters）。
+* 加密过滤器（Encryption Filters）。
+* 触发资源访问事件过滤器。
+* 图像转换过滤器（Image Conversion Filters）。
+* 日志记录和审核过滤器（Logging and Auditing Filters）。
+* MIME-TYPE 链过滤器（MIME-TYPE Chain Filters）。
+* 标记化过滤器（Tokenizing Filters）。
+* XSL/T 过滤器（XSL/T Filters），转换 XML 内容。
+
+主要方法：
+* ```public void doFilter (ServletRequest, ServletResponse, FilterChain)```完成实际的拦截操作
+  - 分别是请求对象，响应对象，过滤器链
+* init（FilterConfig congig） 初始化配置信息
+* destory 销毁
+
+> [!important]
+> init()
+
+***定义过滤器***
+|注解属性 (@WebFilter)|	XML 对应标签|	功能描述|
+|:--|:--|:--|
+|filterName|	`<filter-name>`|	过滤器的逻辑名称（在一个应用中必须唯一）。|
+|urlPatterns 或 value|	`<url-pattern>`|	指定过滤器要拦截的 URL 路径模式。|
+|servletNames	|`<servlet-name>`|	指定过滤器要拦截的特定 Servlet 名称。|
+|initParams	|`<init-param>`	|配置初始化参数，通过 WebInitParam 数组传递。|
+|dispatcherTypes|	`<dispatcher>`	|指定过滤器的触发方式（请求、转发、包含、错误）。|
+|asyncSupported	|`<async-supported>`|	是否支持异步操作（布尔值）。|
+|description	|`<description>`|	过滤器的描述文本。|
+
+
+> [!Tip]
+> initParames可以脱离代码执行需要修改注解值就能修改过滤器行为  
+> 比如我要维护web，我只需要设置一个维护属性，通过读取它的值来决定是否开放网页
+
+> [!IMPORTANT]
+> 获取过滤器属性一般保存在私有属性里
+
+***过滤器处理***
+* ```filterChain.doFilter```传递给下一个过滤器或目标资源
+* **目的是匹配你的过滤器和请求、响应头**
+
+#### listenner
+
+*** 负责初始化资源防止在servlet中写静态代码块```
+
+Web 容器（如 Tomcat）在运行 Web 应用时，会管理三大核心对象的生命周期：
+
+  * ServletContext → 整个 Web 应用
+  * HttpSession → 一次用户会话
+  * ServletRequest → 单次 HTTP 请求
+***每当这些对象被创建、销毁或属性改变时，容器就会自动检查是否有对应的 Listener 注册，如果有，就立即调用其方法。***
+
+|用户/系统行为|	容器内部动作	|自动调用的 Listener 方法|
+|:---|:---|:---|
+|启动 Tomcat |并加载你的 Web 应用	创建 ServletContext 对象	|AppStartListener.contextInitialized()|
+|用户第一次访问网站（如打开 login.jsp）|	创建 HttpSession 对象|	SessionCounter.sessionCreated()|
+|用户关闭浏览器或 Session 超时|	销毁 HttpSession 对象	|SessionCounter.sessionDestroyed()|
+|停止 Tomcat|	销毁 ServletContext 对象	|AppStartListener.contextDestroyed()|
+
+#### 异常处理
+
+标签定义
+* ```<error-page>```包裹整个块
+* ```<error-code>```返回的异常签名
+* ```<location>```路径位置
+
+***注解***
+* ```@ControllerAdvice```捕获整个界面的遗产
+  * ```@ExceptionHandler(RuntimeException.class)```系统异常时自动调用此注解下的方法
+* @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "资源找不到了亲")直接定义异常返回的状态码
+
+#### Cookie
+|方法|描述|
+|:--|:--|
+|1 public void setDomain(String pattern)|该方法设置 cookie 适用的域，例如 runoob.com。|
+|2	public String getDomain()|该方法获取 cookie 适用的域，例如 runoob.com。|
+|3	public void setMaxAge(int expiry)|该方法设置 cookie 过期的时间（以秒为单位）。如果不这样设置，cookie 只会在当前 session 会话中持续有效。|
+|4	public int getMaxAge()|该方法返回 cookie 的最大生存周期（以秒为单位），默认情况下，-1 表示 cookie 将持续下去，直到浏览器关闭。|
+|5	public String getName()|该方法返回 cookie 的名称。名称在创建后不能改变。|
+|6	public void setValue(String newValue)|该方法设置与 cookie 关联的值。|
+|7	public String getValue()|该方法获取与 cookie 关联的值。|
+|8	public void setPath(String uri)|该方法设置 cookie 适用的路径。如果您不指定路径，与当前页面相同目录下的（包括子目录下的）所有 URL 都会返回 cookie。|
+|9	public String getPath()|该方法获取 cookie 适用的路径。|
+|10	public void setSecure(boolean flag)|该方法设置布尔值，表示 cookie 是否应该只在加密的（即 SSL）连接上发送。|
+|11	public void setComment(String purpose)|设置cookie的注释。该注释在浏览器向用户呈现 cookie 时非常有用。|
+|12	public String getComment()|获取 cookie 的注释，如果 cookie 没有注释则返回 null。|
+
+
+#### Session跟踪
+
+HttpSession类实现
+* 在用户请求发来时开辟一个新空间并且给与一个独立字段```request.getSession```
+
+|方法|描述|
+|:--|:--|
+|1	public Object getAttribute(String name)|该方法返回在该 session 会话中具有指定名称的对象，如果没有指定名称的对象，则返回 null。|
+|2	public Enumeration getAttributeNames()|该方法返回 String 对象的枚举，String 对象包含所有绑定到该 session 会话的对象的名称。|
+|3	public long getCreationTime()|该方法返回该 session 会话被创建的时间，自格林尼治标准时间 1970 年 1 月 1 日午夜算起，以毫秒为单位。|
+|4	public String getId()|该方法返回一个包含分配给该 session 会话的唯一标识符的字符串。|
+|5	public long getLastAccessedTime()|该方法返回客户端最后一次发送与该 session 会话相关的请求的时间自格林尼治标准时间 1970 年 1 月 1 日午夜算|起，以毫秒为单位。|
+|6	public int getMaxInactiveInterval()|该方法返回 Servlet 容器在客户端访问时保持 session 会话打开的最大时间间隔，以秒为单位。|
+|7	public void invalidate()|该方法指示该 session 会话无效，并解除绑定到它上面的任何对象。|
+|8	public boolean isNew()|如果客户端还不知道该 session 会话，或者如果客户选择不参入该 session 会话，则该方法返回 true。|
+|9	public void removeAttribute(String name)|该方法将从该 session 会话移除指定名称的对象。|
+|10	public void setAttribute(String name, Object value)|该方法使用指定的名称绑定一个对象到该 session 会话。|
+|11	public void setMaxInactiveInterval(int interval)|该方法在 Servlet 容器指示该 session 会话无效之前，指定客户端请求之间的时间，以秒为单位。|
+
+#### 数据库访问
+
+* 在doGet或doPost中用jdbc的语句处理
+
+#### 文件传传
+
+```javascript
+<form method="post" action="/TomcatTest/UploadServlet" enctype="multipart/form-data">
+    选择一个文件:
+    <input type="file" name="uploadFile" />
+    <br/><br/>
+    <input type="submit" value="上传" />
+</form>
+```
+* ```enctype``` 编码类型
+  * multipart 说明编码有多个部分
+  * form-data 说明是表单数据
+
+* 已经杯spring boot 替代
+
+#### 日期处理
+
+
+* 处理javaUtil的Data类
+
+|boolean after(Date date)|如果调用的 Date 对象中包含的日期在 date 指定的日期之后，则返回 true，否则返回 false。|
+|:---|:---|
+|boolean before(Date date)|如果调用的 Date 对象中包含的日期在 date 指定的日期之前，则返回 true，否则返回 false。|
+|Object clone( )|重复调用 Date 对象。|
+|int compareTo(Date date)|把调用对象的值与 date 的值进行比较。如果两个值是相等的，则返回 0。如果调用对象在 date 之前，则返回一个负值。如果调用对象在 date 之后，则返回一个正值。|
+|int compareTo(Object obj)|如果 obj 是 Date 类，则操作等同于 compareTo(Date)。否则，它会抛出一个 ClassCastException。|
+|boolean equals(Object date)|如果调用的 Date 对象中包含的时间和日期与 date 指定的相同，则返回 true，否则返回 false。|
+|long getTime( )|返回 1970 年 1 月 1 日以来经过的毫秒数。|
+|int hashCode( )|为调用对象返回哈希代码。|
+|void setTime(long time)|设置 time 指定的时间和日期，这表示从 1970 年 1 月 1 日午夜以来经过的时间（以毫秒为单位）。|
+|String toString( )|转换调用的 Date 对象为一个字符串，并返回结果。|
+
+#### 网页转化和重定向
+
+重定向方法
+* ```response.sendRedirct("路径或注解")```
+
+相对路径：response.sendRedirect("displaySuccess");
+
+* 如果当前在 localhost:8080/app/login，它会跳到 localhost:8080/app/displaySuccess。
+
+绝对路径（推荐）：response.sendRedirect(request.getContextPath() + "/displaySuccess");
+
+* ```request.getContextPath() 会动态获取你的项目名称（如 /myweb），这样即使你改了项目名，代码也不会失效。```
+
+***区别：***
+|特性	|重定向 (Redirect)|	转发 (Forward)|
+|:---|:---|:---|
+|浏览器地址栏|	会变（显示新地址）|	不变（显示原地址）|
+|请求次数	|2 次请求	|1 次请求|
+|数据共享|	丢失原 request，需用 Session|	共享原 request 数据|
+|跳转位置	|可以跳转到任意网站 (如百度)	|只能跳转到本站内部资源|
+|执行位置	|客户端（浏览器）行为|	服务器内部行为|
+
+#### 自动刷新
+```public void setIntHeader(String header, int headerValue)```

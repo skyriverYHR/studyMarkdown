@@ -43,7 +43,8 @@
 
 ## DDL
 
-```flow
+***数据库***
+```sql
 SHOW DATABASES 查询所有
 SELECT DATABASE 查询当前
 CREATE DATABASE + 创建
@@ -54,12 +55,11 @@ CREATE DATABASE + 创建
 }
 DROP DATABASE [IF EXISTS](数据库名) 删除
 USE （数据库名）使用
+```
 
 
-——————————————————————————————————————————
-
-
--- 表 --
+***-- 表 --***
+```sql
 SHOW TABLES 查询所有表
 DESC （表名）；查询表结构
 SHOW CREATE TABLE （表名）；查询指定表的建表语句

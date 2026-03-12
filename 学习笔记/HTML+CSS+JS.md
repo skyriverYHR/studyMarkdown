@@ -230,7 +230,6 @@
     ```
 
   - label 标签
-
     ```html
     1. for = "id" 连接组件
     ```
@@ -787,14 +786,16 @@ float功能
 绝对定位 
  * 开启绝对定位：```position: absolute;```
  * 参考它的包含块
-    * 没有脱离文档流 ---父元素
-    * 脱离文档流 --- 第一个开启定位的元素
+    * 没有脱离文档流：它父元素
+    * 脱离文档流：它的父元素中第一个开启定位的元素
  * 绝对定位不能浮动 
 
 固定定位
+ * ```Fixed```
  * 根据窗口位置定位 （例子：小广告）
 
 粘性定位
+ * ```sticky```
  * 参考定位 --- 离他最近的可滚动祖先
  * 不脱离文档流
  * 可以和滚动一起用
@@ -1609,47 +1610,29 @@ transform: scaleX(1.2) scaleZ(1.5);
 
   伸缩盒模型的出现，逐渐演变出了一套新的布局方案——flex布局。
 
-## 六、伸缩容器、伸缩项目
+## 六、伸缩容器、伸缩项目（一维布局）
 
-### 伸缩容器
-- **伸缩容器**：开启了 flex 的元素，就是伸缩容器。
+### 基本属性
 
-1. 给元素设置：`display: flex` 或 `display: inline-flex`，该元素就变为了伸缩容器。
-2. `display: inline-flex` 很少使用，因为可以给多个伸缩容器的父容器，也设置为伸缩容器。
-3. 一个元素可以同时是：伸缩容器、伸缩项目。
 
-### 伸缩项目
-- **伸缩项目**：伸缩容器所有子元素自动成为了伸缩项目。
+**主轴**：伸缩项目沿着主轴排列，主轴默认是水平的，默认方向是：从左到右（左边是起点，右边是终点）。
 
-1. 仅伸缩容器的子元素成为了伸缩项目，孙子元素、重孙子元素等后代，不是伸缩项目。
-2. 无论原来是哪种元素（块、行内块、行内），一旦成为了伸缩项目，全都会"块状化"。
+ **侧轴**：与主轴垂直的就是侧轴，侧轴默认是垂直的，默认方向是：从上到下（上边是起点，下边是终点）。
 
-### 主轴与侧轴
 
-*   **主轴**：伸缩项目沿着主轴排列，主轴默认是水平的，默认方向是：从左到右（左边是起点，右边是终点）。
-*   **侧轴**：与主轴垂直的就是侧轴，侧轴默认是垂直的，默认方向是：从上到下（上边是起点，下边是终点）。
+**控制主轴方向**：`flex-direction`
+  * **常用值如下**：
+    1.  `row`：主轴方向水平从左到右 —— **默认值**
+    2.  `row-reverse`：主轴方向水平从右到左。
+    3.  `column`：主轴方向垂直从上到下。
+    4.  `column-reverse`：主轴方向垂直从下到上。
 
-### 主轴方向
-    *   **属性名**：`flex-direction`
-    *   **常用值如下**：
-
-        1.  `row`：主轴方向水平从左到右 —— **默认值**
-        2.  `row-reverse`：主轴方向水平从右到左。
-        3.  `column`：主轴方向垂直从上到下。
-        4.  `column-reverse`：主轴方向垂直从下到上。
-
-flex-direction 属性图示：
-  *  `column-reverse`：⬆️ (从下往上)
-  *  `column`：⬇️ (从上往下)
-  *  `row`：➡️ (从左往右)
-  *  `row-reverse`：⬅️ (从右往左)
 
 > **注意**：改变了主轴的方向，侧轴方向也随之改变。
 
-### 主轴换行方式
 
-*   **属性名**：`flex-wrap`
-*   **常用值如下**：
+
+**主轴换行方式**：`flex-wrap`
 
     1.  `nowrap`：默认值，不换行。
         > （图示：所有项目 [1] 到 [10] 强行挤在同一行）
@@ -1671,9 +1654,8 @@ flex-direction 属性图示：
         flex-flow: row wrap;
         ```
 
-### 主轴对齐方式
 
-- **属性名**: `justify-content`
+**主轴对齐方式**: `justify-content`
 - **作用**: 设置伸缩项目在**主轴方向**上的对齐方式
 
 
@@ -1689,12 +1671,9 @@ flex-direction 属性图示：
 6. **`space-evenly`**：均匀分布，两端距离与中间距离一致。
    - 所有间隔（包括项目之间、项目与边框之间）都完全相等
 
-### 侧轴对齐方式
 
-
-**只有一行的情况**：
-
-- **所需属性**: `align-items`
+**侧轴对齐方式**：
+- **单行对齐**: `align-items`
 - **作用**: 设置伸缩项目在**侧轴方向**上的对齐方式（单行情况）
 ---
 **常用值**
@@ -1706,9 +1685,7 @@ flex-direction 属性图示：
 5. **`stretch`**：如果伸缩项目未设置高度，将占满整个容器的高度。——（默认值）
 
 
-### 多行的情况
-
-- **所需属性**: `align-content`
+- **多行对齐**: `align-content`
 - **作用**: 设置多行伸缩项目在**侧轴方向**上的对齐方式
 
 **常用值**:
@@ -1822,7 +1799,28 @@ order 属性
 }
 ```
 
-## 八、JavaScript
+## 八、二维布局
+
+***启动二维布局***```display:grid```
+
+* **盒子属性**
+  |属性|作用|
+  |:--|:--|
+  |grid-template-columns|	定义列轨道（如 1fr 2fr, repeat(3, 100px)）|
+  |grid-template-rows	|定义行轨道|
+  |grid-template-areas|	用命名区域布局（配合 grid-area）|
+  |gap	|网格间隙（替代 grid-column-gap / grid-row-gap）|
+  |justify-items / align-items	|单元格内子项对齐|
+  |justify-content / align-content	|整个网格在容器中的对齐|
+
+* **盒子内容属性**
+  |属性|作用|
+  |:--|:--|
+  |grid-column / grid-row|	跨越列/行（如 1 / 3）|
+  |grid-area|简写：row-start / col-start / row-end / col-end|
+  |justify-self / align-self|单个子项在单元格内对齐|
+
+## JavaScript
 
 - MDN文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Control_flow_and_error_handling
 - 菜鸟教程：https://www.runoob.com/js/js-howto.html
@@ -2233,7 +2231,7 @@ async/await 语法:
   myObject = myFunction.call(myObject, 10, 2);     // 返回 20
   ```
 
-****闭包****
+##### ****闭包****
 - 处理定义一个变量时所有函数都能修改的问题
   ```javascript
   function computeTimes(){
@@ -2255,7 +2253,16 @@ async/await 语法:
 
 > [!warning]
 > 为什么不直接掉用computeTimes而是赋值给变量;
-> 直接调用会重复运行第一行代码,我们要做的是将内部的方法调出，保护内部的变量
+> 直接调用会重复运行第一行代码,我们要做的是将内部的方法调出，保护内部的变量  
+> 闭包会阻止被引用的变量被垃圾回收，如果滥用可能导致内存占用过高。
+
+|作用|说明|
+|:--|:--|
+|封装私有状态|	隐藏内部数据，提供受控接口|
+|保持上下文|	在异步/回调中“记住”环境|
+|提高复用性|	通过函数工厂生成定制逻辑|
+|性能优化	|缓存计算结果（记忆化）|
+|实现模块化|	构建独立、可维护的代码单元|
 
 #### 11.类
 
@@ -2264,6 +2271,9 @@ java 类似
 - 静态方法static修饰，类似javaprivate只能类内部访问
 
 #### DOM
+
+> [!important]
+> DOM中包含的是标签的获取和页面内容的获取
 
 ***当网页被加载时当网页被加载时，浏览器会创建页面的文档对象模型（Document Object Model）树***
 
@@ -2282,7 +2292,14 @@ const trueArray = Array.from(y);
 
 * 分配事件
   - 名为 displayDate 的函数被分配给 id="myBtn" 的 HTML 元素。
-  - ```<script> document.getElementById("myBtn").onclick=function(){displayDate()}; </script>```
+  - ```document.getElementById("myBtn").onclick=function(){displayDate()};```
+
+* 绑定事件 ```element.addEventListener("事件"，函数);```
+  - click点击
+  - mouse鼠标放置
+
+> [!note]
+> 绑定事件和分配事件一样可以直接定义内部匿名函数
 
 * onload 和 onunload 
   - 事件会在用户进入或离开页面时被触发。
@@ -2310,6 +2327,12 @@ const trueArray = Array.from(y);
   element.appendChild(para);  <!-- 把新的标签插入已有的标签中 -->
   </script>
   ```
+
+* 移除监听器```telement.removeEventListener("mousemove", myFunction);```
+
+* 事件委托 - 父元素添加事件处理子元素相同的事件
+
+
 
 #### API/对象
 
@@ -2369,6 +2392,47 @@ const trueArray = Array.from(y);
    - test()方法搜索字符串指定的值，根据结果并返回真或假。
    - exec() 方法检索字符串中的指定值。返回值是被找到的值。如果没有发现匹配，则返回 null。
   
+#### 解构
+
+> [!important]
+> 1.解构是是把参数提取出来成一个变量，在数组或对象不稳定（数据经常变化）的情况下很难用，但是如果数组或对象稳定不变，那么可以简化代码。  
+> 2.解构可以只解部分
+
+> [!waring]
+> 数组解构根据索引一一对应，要跳过需要逗号间隔
+> 对象需要键的名字解构
+
+
+* 数组
+  ```javascript
+  // 函数返回一个固定结构的数组 [x, y]
+  function getPoint() {
+    return [10, 20];
+  }
+
+  // 使用数组解构直接提取
+  const [x, y] = getPoint();
+
+  console.log(x); // 10
+  console.log(y); // 20
+  ```
+
+* 对象
+  ```javascript
+  const user = {
+    id: 101,
+    name: '张三',
+    age: 25,
+    email: 'zhangsan@example.com'
+  };
+
+  // 使用对象解构提取需要的属性
+  const { name, age } = user;
+
+  console.log(name); // '张三'
+  console.log(age);  // 25
+  ```
+
 ### BOM
 
 浏览器对象模型 (BOM) 使 JavaScript 有能力与浏览器"对话"。
@@ -2388,15 +2452,16 @@ const trueArray = Array.from(y);
 - Cookie 用于存储 web 页面的用户信息。(网站自动登录)
   - 创建一个cookie对象存储到网页中 ```document.cookie="username=John Doe";``` 
   - 获取所有的cookie对象 ```var x = document.cookie;``` 返回一个对象
+- localStorage 用于存储浏览器的页面数据
 
-- [!waring]
-- 来自 navigator 对象的信息具有误导性，不应该被用于检测浏览器版本，这是因为：  
-- navigator 数据可被浏览器使用者更改  
-- 一些浏览器对测试站点会识别错误  
-- 浏览器无法报告晚于浏览器发布的新操作系统  
+> [!waring]
+> 来自 navigator 对象的信息具有误导性，不应该被用于检测浏览器版本，这是因为：  
+> navigator 数据可被浏览器使用者更改  
+> 一些浏览器对测试站点会识别错误  
+> 浏览器无法报告晚于浏览器发布的新操作系统  
 
-- [!waring]
-- Cookie 本身是一种通用的 Web 技术标准（由 HTTP 协议定义），所有网站和浏览器都遵循它。  
+> [!waring]
+> Cookie 本身是一种通用的 Web 技术标准（由 HTTP 协议定义），所有网站和浏览器都遵循它。  
 - 但每个用户（访问者）获得的 Cookie 内容通常是不同的，而且彼此隔离。
 
 ### javascript库（框架）
@@ -2407,3 +2472,48 @@ const trueArray = Array.from(y);
 * MooTools
 
 *** 导入库 script标签src = ”引入地址“
+
+
+### 实战中遇到的问题
+
+* 数组for和map遍历的区别
+  - for处理复杂的逻辑业务
+  - map简单，天然返回数组，***不会污染原数组***，更简单
+
+> [!important]
+> .map是为了将后端传输的数据转换成前端需要的格式
+
+* 高并发情况的表单提交信息，需要id区分数据的情况
+  - ```const id = crypto.randomUUID();//随机代码串做id```
+  - 页面的实时写入/删除
+
+## web底层
+
+* url
+  |部分|示例|说明|
+  |:--|:--|:--|
+  |协议（Scheme）|	https	用什么方式通信（HTTP、HTTPS、FTP 等）|
+  |主机名（Host）	|www.example.com	目标服务器的域名|
+  |端口（Port）	:443|	服务器上监听的端口号（HTTPS 默认 443，HTTP 默认 80，可省略）|
+  |路径（Path）	|/path/to/page.html	服务器上的具体资源位置|
+  |查询参数（Query）|	?search=web	传递给服务器的额外数据（键值对）|
+  |片段（Fragment）	|#section1	浏览器内部跳转（不会发给服务器）|
+
+
+* HTTP（HyperText Transfer Protocol）是应用层协议，规定了：
+
+  - 客户端如何发送请求
+  - 服务器如何返回响应
+  - 双方用什么格式交流（纯文本）
+
+* 3. IP 与 DNS
+ - 作用：把“名字”变成“门牌号”，让数据能找到路
+ - IP 地址：设备在网络中的唯一数字标识，如 192.168.1.1 或 240e:ff:e020:100::1（IPv6）
+ - DNS（域名系统）：把人类好记的域名（如 baidu.com）翻译成机器用的 IP 地址
+   ```
+   工作流程：
+    你在浏览器输入 https://github.com
+    浏览器问 DNS 服务器：“github.com 的 IP 是多少？”
+    DNS 返回：20.205.243.166
+    浏览器用这个 IP 建立 TCP 连接，发起 HTTP 请求
+   ```
